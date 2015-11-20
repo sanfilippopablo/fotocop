@@ -17,6 +17,13 @@ Vagrant.configure(2) do |config|
     sudo apt-get update
     sudo apt-get install -y tomcat7 mysql-server maven
 
+    # Setup docs
+    cd /vagrant/docs
+    pip install virtualenv
+    virtualenv --no-site-packages .
+    source bin/activate
+    pip install -r requriments.txt
+
   SHELL
 
 end
