@@ -1,2 +1,7 @@
 /target/
 .vagrant
+
+# Eclipse things (The environment should not be tied to and IDE)
+.classpath
+.project
+.settings
