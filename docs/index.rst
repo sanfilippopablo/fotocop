@@ -6,6 +6,8 @@ Contenido:
 .. toctree::
    :maxdepth: 2
 
+   casos_de_uso
+
 Índices y tablas
 ==================
 
