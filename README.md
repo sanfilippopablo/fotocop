@@ -34,7 +34,7 @@ La máquina está configurada para crear una red privada con IP `192.168.33.10`.
 
 ## Build docs
 
-La documentación se crea usando la sintaxis reStructuredText a través Sphinx.
+La documentación se crea usando la sintaxis reStructuredText a través Sphinx. Documentación básica del lenguaje [acá](http://sphinx-doc.org/rest.html).
 
 Los archivos de documentación se guardan con extensión .rst dentro de docs/ y deben ser agregados al toctree en index.rst.
 
