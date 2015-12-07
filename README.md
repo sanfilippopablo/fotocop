@@ -31,6 +31,7 @@ mvn war:war
 
 La máquina está configurada para crear una red privada con IP `192.168.33.10`. Tomcat está configurado para correr en el puerto 8080. Por lo tanto, en la máquina host se puede ver el sitio en `http://192.168.33.10:8080`.
 
+> Nota: Luego de un cambio al Vagrantfile, es necesario reaprovisionar la máquina. Para eso ejecutar `vagrant provision` o `vagrant destroy && vagrant halt` para evitar conflictos.
 
 ## Build docs
 
