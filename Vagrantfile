@@ -15,7 +15,7 @@ Vagrant.configure(2) do |config|
     sudo debconf-set-selections <<< 'mysql-server mysql-server/root_password_again password devpassword'
 
     sudo apt-get update
-    sudo apt-get install -y tomcat7 mysql-server maven python-pip build-essentials
+    sudo apt-get install -y tomcat7 mysql-server maven python-pip build-essential
 
     # Setup docs
     cd /vagrant/docs
