@@ -59,4 +59,4 @@ Esto genera el html dentro de `_build/html`. Para visualizarla, servirla con un 
 cd _build/html
 python -m SimpleHTTPServer
 ````
-Luego acceder desde el navegador en `http://192:168.33.10:8000`.
+Luego acceder desde el navegador en `http://192.168.33.10:8000`.

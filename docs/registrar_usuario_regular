@@ -6,8 +6,8 @@ Versión 1.0
 Camino básico
 --------------
 
-1. Usuario no registrado selecciona la opción "Nuevo usuario". Sistema muestra el form de new user.
-2. Usuario no registrado ingresa la información pedida (username, pass con confirmación, mail) y confirma. Sistema se encarga del registro del nuevo usuario e informa al usuario.
+1. Usuario no registrado selecciona la opción "Nuevo usuario". Sistema muestra el form de nuevo usuario.
+2. Usuario no registrado ingresa la información pedida (username, pass con confirmación, mail, nombre, apellido y DNI) y confirma. Sistema se encarga del registro del nuevo usuario e informa al usuario.
 
 Alternativas
 ---------------
