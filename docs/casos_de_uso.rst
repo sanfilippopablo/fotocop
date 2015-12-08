@@ -10,8 +10,6 @@ Casos de Uso
 Registrar un nuevo usuario regular
 ===================================
 
-Versión 1.0
-
 Camino básico
 ***************
 

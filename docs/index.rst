@@ -7,6 +7,7 @@ Contenido:
    :maxdepth: 2
 
    casos_de_uso
+   plan_de_proyecto
 
 Índices y tablas
 ==================
