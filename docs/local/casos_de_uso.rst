@@ -1,1 +1,0 @@
-/vagrant/docs/casos_de_uso.rst

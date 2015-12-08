@@ -7,19 +7,29 @@ Casos de Uso
   :local:
 
 
-Crear usuario
-=============
+Registrar un nuevo usuario regular
+===================================
 
-Flujo básico
-************
+Versión 1.0
 
-1. Usuario clickea botón registrarse.
-2. Sistema lo lleva a la página registro.
-3. Usuario completa el formulario.
-4. Sistema valida los datos y lo loguea.
+Camino básico
+***************
 
-Caminos alternativos
-********************
+1. Usuario no registrado selecciona la opción "Nuevo usuario". Sistema muestra el form de nuevo usuario.
+2. Usuario no registrado ingresa la información pedida (username, pass con confirmación, mail, nombre, apellido y DNI) y confirma. Sistema se encarga del registro del nuevo usuario e informa al usuario.
 
-4.a Datos incorrectos.
-  4.a.1 Vuelve a la página registro.
+Alternativas
+**************
+
+2.A Mail no válido.
+  2.A.1 Sistema informa situación (sin borrar la información ingresada).
+2.B Las contraseñas no coinciden.
+  2.B.1 Sistema informa situación (sin borrar la información ingresada).
+2.C Username ya existe.
+  2.C.1 Sistema informa situación (sin borrar la información ingresada).
+2.D Ya hay un usuario asociado a ese mail.
+  2.D.1 Sistema informa situación (sin borrar la información ingresada).
+
+Notas
+********
+No aplica.
