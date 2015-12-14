@@ -60,3 +60,42 @@ cd _build/html
 python -m SimpleHTTPServer
 ````
 Luego acceder desde el navegador en `http://192.168.33.10:8000`.
+
+### Documentación en el código
+
+Se debe usar la sintaxis de Javadoc para documentar el código. Idealmente, todas las clases y métodos deberían estar documentados.
+La referencia completa de la sintaxis Javadoc puede encontrarse [acá](http://www.oracle.com/technetwork/articles/java/index-137868.html), sin embargo, con el siguiente ejemplo basta:
+
+````java
+package main;
+
+/**
+* Permite hacer algunos cálculos básicos.
+*/
+public class A {
+
+  /**
+  * Suma dos números.
+  *
+  * @param a un entero
+  * @param b otro entero
+  * @return La suma de los dos
+  */
+  public static int sum (int a, int b) {
+    return a + b;
+  }
+
+  /**
+  * Resta dos números.
+  *
+  * @param a un entero
+  * @param b otro entero
+  * @return La resta de los dos
+  */
+  public static int diff (int a, int b) {
+    return a - b;
+  }
+}
+````
+
+El build system de los docs está configurado para incluir los docs del código automáticamente en la documentación generada por Sphinx.

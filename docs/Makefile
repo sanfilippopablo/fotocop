@@ -52,6 +52,7 @@ clean:
 	rm -rf $(BUILDDIR)/*
 
 html:
+	javasphinx-apidoc -u -o ./code-docs ../src/main/java/
 	$(SPHINXBUILD) -b html $(ALLSPHINXOPTS) $(BUILDDIR)/html
 	@echo
 	@echo "Build finished. The HTML pages are in $(BUILDDIR)/html."

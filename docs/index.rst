@@ -8,6 +8,7 @@ Contenido:
 
    casos_de_uso
    plan_de_proyecto
+   code-docs/packages
 
 Índices y tablas
 ==================
