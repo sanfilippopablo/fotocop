@@ -33,6 +33,14 @@ La máquina está configurada para crear una red privada con IP `192.168.33.10`.
 
 > Nota: Luego de un cambio al Vagrantfile, es necesario reaprovisionar la máquina. Para eso ejecutar `vagrant provision` o `vagrant destroy && vagrant halt` para evitar conflictos.
 
+## Database
+
+La DB es MySQL corriendo dentro de la máquina virtual escuchando en el puerto por defecto, 3306. Está configurada para escuchar en todas las interfaces (0.0.0.0), así que se puede acceder desde afuera usando la dirección de la máquina como host: `192.168.33.10`, útil para administrarla con Workbench o esa onda.
+
+El usuario para acceder es `root` y el password es `rootpassword`. Estos valores están disponibles dentro de la máquina en las variables del entorno `OPENSHIFT_MYSQL_DB_USERNAME` y `OPENSHIFT_MYSQL_DB_PASSWORD`. Estos valores también están seteados dentro del entorno de openshift con los valores correspondientes para acceder a la DB seteada ahí adentro. Por eso, en el código hay que usar estas variables.
+
+Dentro de /scripts está el script `setup_db.sql` que contiene el schema de la DB. Se ejecuta al crearse la máquina. Siempre que se haga un cambio en el schema de la DB, hacer un export de la nueva DB a este archivo.
+
 ## Build docs
 
 La documentación se crea usando la sintaxis reStructuredText a través Sphinx. Documentación básica del lenguaje [acá](http://sphinx-doc.org/rest.html).
@@ -99,3 +107,7 @@ public class A {
 ````
 
 El build system de los docs está configurado para incluir los docs del código automáticamente en la documentación generada por Sphinx.
+
+## Notas adicionales
+
+Avisar siempre que haya un cambio al entorno (cambios en el Vagrantfile o en el scripts/setup_db.sql) para que todos actualicemos nuestros respectivos entornos con `vagrant provision`.
