@@ -41,7 +41,7 @@ El usuario para acceder es `root` y el password es `rootpassword`. Estos valores
 
 Dentro de /scripts está el script `setup_db.sql` que contiene el schema de la DB. Se ejecuta al crearse la máquina. Siempre que se haga un cambio en el schema de la DB, hacer un export de la nueva DB a este archivo.
 
-## Build docs
+## Docs
 
 La documentación se crea usando la sintaxis reStructuredText a través Sphinx. Documentación básica del lenguaje [acá](http://sphinx-doc.org/rest.html).
 
@@ -53,7 +53,7 @@ Para hacer el build:
 
 ````
 cd docs
-source bin/activate
+source ~/docsvenv/bin/activate
 ````
 
 2. Hacer el build.
@@ -62,12 +62,7 @@ source bin/activate
 make html
 ````
 
-Esto genera el html dentro de `_build/html`. Para visualizarla, servirla con un servidor HTTP.
-````
-cd _build/html
-python -m SimpleHTTPServer
-````
-Luego acceder desde el navegador en `http://192.168.33.10:8000`.
+Esto genera el html dentro de `_build/html`. Hay un servidor nginx configurado automáticamente para servir esa carpeta en el puerto 8000. Por lo tanto, se puede acceder desde el navegador en `http://192.168.33.10:8000`.
 
 ### Documentación en el código
 
