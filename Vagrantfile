@@ -26,8 +26,11 @@ Vagrant.configure(2) do |config|
     # Export DB params. Those are the environment variables used by OpenShift,
     # so to be able to use the same Java code to open a connection using them
     # in both environments, I'll set them with the same name here.
-    sudo su -c 'echo "export OPENSHIFT_MYSQL_DB_USERNAME=root\nexport OPENSHIFT_MYSQL_DB_PASSWORD=rootpassword" >> /etc/profile'
+    sudo cp utils/db_vars.sh /etc/profile
+    sudo cp utils/db_vars.sh /usr/share/tomcat7/bin/setenv.sh
+
     source /etc/profile
+    sudo service tomcat7 restart
 
     # Configure mysqld to listen on all interfaces
     sudo sed -i "s/.*bind-address.*/bind-address = 0.0.0.0/" /etc/mysql/my.cnf
