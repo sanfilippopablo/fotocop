@@ -2,11 +2,15 @@ package users.servlets;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
+import common.ValidationManager;
+import users.data.UsersService;
+import users.entities.User;
+import users.exceptions.AuthException;
 
 /**
  * Se encarga de hacer el login de usuarios. Por GET, sólamente sirve
@@ -27,7 +31,7 @@ public class LoginServlet extends HttpServlet {
 		
 		// Si ya está logueado, redirigir al home
 		HttpSession session = request.getSession();
-		if ((Boolean) session.getAttribute("isLogged")) {
+		if ((Boolean) session.getAttribute("isLogged") != null && (Boolean) session.getAttribute("isLogged")) {
 			response.sendRedirect("/");
 			return;
 		}
@@ -43,7 +47,46 @@ public class LoginServlet extends HttpServlet {
 	 * vuelve a mostrar la página de login con el informe de errores.
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Implementar la lógica descrita arriba.
+
+		String username = request.getParameter("username");
+		String password = request.getParameter("password");
+		
+		// Single field validations
+		
+		ValidationManager validationManager = new ValidationManager();
+		
+		if (username == null || username.isEmpty()) {
+			validationManager.addError("username", "isEmpty");
+		}
+		
+		if (password == null || password.isEmpty()) {
+			validationManager.addError("password", "isEmpty");
+		}
+		
+		if (validationManager.isValid()) {
+			
+			UsersService usersService = new UsersService();
+			
+			try {
+				User user = usersService.authenticate(username, password);
+				
+				// Actual login
+				HttpSession session = request.getSession();
+				session.setAttribute("isLogged", true);
+				session.setAttribute("user", user);
+				response.getWriter().append("Logged!");
+			}
+			catch (AuthException e) {
+				// Authentication failed
+				validationManager.addCustomError("misc", e.getMessage());
+				request.setAttribute("validationManager", validationManager);
+				request.getRequestDispatcher("/login.jsp").forward(request, response);
+			}
+			
+		} else {
+			request.setAttribute("validationManager", validationManager);
+			request.getRequestDispatcher("/login.jsp").forward(request, response);
+		}
 	}
 
 }
