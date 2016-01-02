@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Helper Class para cuestiones de validación. Es un pequeño wrapper around Map.
+ * Clase de ayuda para cuestiones de validación. Es un pequeño envoltorio sobre Map.
  * Provee métodos útles para llevar registros de errores en diferentes campos.
  * El caso de uso normal es durante la validación de un formulario ir registrando
  * los errores en una instancia de esta clase y luego, en el JSP, mostrar los errores
