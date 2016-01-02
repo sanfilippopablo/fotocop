@@ -1,6 +1,4 @@
-CREATE DATABASE  IF NOT EXISTS `fotocop` /*!40100 DEFAULT CHARACTER SET latin1 */;
-USE `fotocop`;
--- MySQL dump 10.13  Distrib 5.5.46, for debian-linux-gnu (x86_64)
+-- MySQL dump 10.16  Distrib 10.1.9-MariaDB, for Linux (x86_64)
 --
 -- Host: 192.168.33.10    Database: fotocop
 -- ------------------------------------------------------
@@ -40,7 +38,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (1,'pablo','123','pablo@gmail.com',1),(2,'facundo','','facundo@gmail.com',0);
+INSERT INTO `users` VALUES (1,'pablo','$2a$08$rveeVqvtEkskz4hUZTZF2uV.L3xxKwRx9GU0s06gWAbR6P6DLVXrq','pablo@gmail.com',1),(2,'facundo','$2a$08$Nnf71JEfrx4jp8WUXg6Hdu82lRn3q4TF9NEH/wuJCwlMMJ4hUIeHa','facundo@gmail.com',0);
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -53,4 +51,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2015-12-18 18:25:59
+-- Dump completed on 2016-01-02  1:14:56
