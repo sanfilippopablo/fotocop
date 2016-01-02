@@ -39,6 +39,18 @@ public class User {
 		hashedPassword = BCrypt.hashpw(password, salt);
 	}
 	
+	/**
+	 * Setea el valor del field hashedPassword al valor
+	 * del parámetro. Es solo para initialization purposes.
+	 * Cuando se quiera setear una contraseña utilizar
+	 * setPassword.
+	 * 
+	 * @param hashedPassword
+	 */
+	public void setHashedPassword(String hashedPassword) {
+		this.hashedPassword = hashedPassword;
+	}
+	
 	
 	/**
 	 * Checkea el password recibido por parámetro
