@@ -1,5 +1,11 @@
 package users.data;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
+import common.DBConnection;
 import users.entities.User;
 import users.exceptions.AuthException;
 
@@ -20,19 +26,46 @@ public class UsersService {
 	 * @param password
 	 * @return User
 	 * @throws AuthException
+	 * @throws SQLException 
 	 */
-	public User authenticate(String username, String password) throws AuthException {
-		// TODO This is a stub. Escribir la implementación correcta
-		// usando getUserByUsername y checkPassword y esa onda.
-
-		if (username.equals("pablo") && password.equals("123")) {
-			User user = new User();
-			user.setUsername("pablo");
-			user.setEmail("sanfilippopablo@gmail.com");
+	public User authenticate(String username, String password) throws AuthException, SQLException {
+		
+		User user = getUserByUsername(username);
+		
+		if (user.checkPassword(password)) {
 			return user;
 		}
 		else {
-			throw new AuthException("Usuario inválido.");
+			throw new AuthException("Contraseña incorrecta.");
+		}
+	}
+	
+	/**
+	 * Devuelve un objeto User tomando como parámetro
+	 * el username.
+	 * 
+	 * @param username
+	 * @return User
+	 * @throws AuthException
+	 * @throws SQLException 
+	 */
+	public User getUserByUsername(String username) throws AuthException, SQLException {
+		
+		Connection connection = DBConnection.getConnection();
+		String sql = "SELECT * FROM users WHERE username = ?;";
+		PreparedStatement statement = connection.prepareStatement(sql);
+		statement.setString(1, username);
+		ResultSet resultSet = statement.executeQuery();
+		
+		if (!resultSet.next()) {
+			throw new AuthException("Usuario inexistente.");
+		}
+		else {
+			User user = new User();
+			user.setUsername(username);
+			user.setEmail(resultSet.getString("email"));
+			user.setHashedPassword(resultSet.getString("password"));
+			return user;
 		}
 	}
 
