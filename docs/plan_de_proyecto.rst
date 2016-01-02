@@ -46,6 +46,7 @@ Los bloques en los que el trabajo se divide son:
 1. Alta de usuarios.
   * Registrar un usuario regular.
   * Registrar un usuario administrador.
+  * Login al sistema.
 2. Trabajos de impresión.
   * Enviar, desde un usuario regular, trabajo a imprimir.
   * Mostrar a un usuario administrador la lisat de trabajos pendientes por imprimir.
