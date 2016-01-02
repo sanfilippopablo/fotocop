@@ -48,7 +48,7 @@ public class ValidationManagerTest {
 		assertFalse("Campo hola no debería tener errores", vm.fieldHasError("hola"));
 		
 		vm.addError("hola", "isEmpty");
-		assertFalse("Campo hola debe tener error ahora", vm.fieldHasError("hola"));
+		assertTrue("Campo hola debe tener error ahora", vm.fieldHasError("hola"));
 		
 	}
 	
