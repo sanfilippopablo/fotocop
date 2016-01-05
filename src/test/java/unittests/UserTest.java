@@ -1,4 +1,4 @@
-package fotocop;
+package unittests;
 
 import static org.junit.Assert.*;
 
