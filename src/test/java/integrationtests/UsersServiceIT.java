@@ -59,5 +59,61 @@ public class UsersServiceIT extends IntegrationBase {
 		assertNotNull("User should exist", user);
 		assertEquals("User should be the right one", user.getUsername(), "pablo");
 	}
+	@Test
+	public void testCreateUser() {
+		
+		User user = new User();
+		user.setUsername("chalo");
+		user.setEmail("gperfar@gmail.com");
+		user.setPassword("40222RTYU");
+		
+		try {
+			user = usersService.createUser(user);
+			user = null;
+			user = usersService.getUserByUsername("chalo");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		assertNotNull("User should have been registered", user);		
+	}
 
+	@Test
+	public void testCreateUserSameUsername() {
+		
+		User user = new User();
+		user.setUsername("pablo");
+		user.setEmail("gperfar@gmail.com");
+		user.setPassword("40222RTYU");
+	
+		try {	
+			try {
+				user = usersService.createUser(user);
+				fail("La línea anterior debe tirar error");
+			} catch (AuthException e) {
+				e.printStackTrace();
+			}
+		}
+		catch (Exception e){
+		}
+	}
+
+	@Test
+	public void testCreateUserSameEmail() {
+		
+		User user = new User();
+		user.setUsername("chalo");
+		user.setEmail("pablo@gmail.com");
+		user.setPassword("40222RTYU");
+	
+		try {	
+			try {
+				user = usersService.createUser(user);
+				fail("La línea anterior debe tirar error");
+			} catch (AuthException e) {
+				e.printStackTrace();
+			}
+		}
+		catch (Exception e){
+		}
+	}
 }
