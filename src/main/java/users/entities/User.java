@@ -39,6 +39,9 @@ public class User {
 		hashedPassword = BCrypt.hashpw(password, salt);
 	}
 	
+	public String getHashedPassword(){
+		return hashedPassword;
+	}
 	/**
 	 * Setea el valor del campo hashedPassword al valor
 	 * del parámetro. Es solo para inicialización.
