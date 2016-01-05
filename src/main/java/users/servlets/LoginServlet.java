@@ -41,6 +41,7 @@ public class LoginServlet extends HttpServlet {
 		session.setAttribute("isLogged", false);
 		// Servir login page
 		request.getRequestDispatcher("/login.jsp").forward(request, response);
+		
 	}
 
 	/**
@@ -83,7 +84,7 @@ public class LoginServlet extends HttpServlet {
 			}
 			catch (SQLException e) {
 				response.setStatus(500);
-				request.getRequestDispatcher("/500.html");
+				request.getRequestDispatcher("/500.html").forward(request, response);
 			}
 			
 			// Actual login
