@@ -21,7 +21,7 @@ Vagrant.configure(2) do |config|
     sudo debconf-set-selections <<< 'mysql-server mysql-server/root_password_again password rootpassword'
 
     sudo apt-get update
-    sudo apt-get install -y tomcat7 mysql-server maven python-pip build-essential nginx python-dev zlib1g-dev libxml2-dev libxslt-dev python-lxml default-jdk python-virtualenv
+    sudo apt-get install -y tomcat7 mysql-server maven python-pip build-essential nginx firefox xvfb python-dev zlib1g-dev libxml2-dev libxslt-dev python-lxml default-jdk python-virtualenv
 
     # Export DB params. Those are the environment variables used by OpenShift,
     # so to be able to use the same Java code to open a connection using them

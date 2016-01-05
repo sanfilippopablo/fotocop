@@ -30,7 +30,7 @@ public class User {
 	/**
 	 * 
 	 * Setea el password del user, hasheando el password
-	 * ingresado y storeandolo en el field hashedPassword.
+	 * ingresado y guardándolo en el campo hashedPassword.
 	 * 
 	 * @param password
 	 */
@@ -40,8 +40,8 @@ public class User {
 	}
 	
 	/**
-	 * Setea el valor del field hashedPassword al valor
-	 * del parámetro. Es solo para initialization purposes.
+	 * Setea el valor del campo hashedPassword al valor
+	 * del parámetro. Es solo para inicialización.
 	 * Cuando se quiera setear una contraseña utilizar
 	 * setPassword.
 	 * 

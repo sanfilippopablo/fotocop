@@ -27,7 +27,7 @@ CREATE TABLE `users` (
   `username` varchar(45) NOT NULL,
   `password` varchar(200) NOT NULL,
   `email` varchar(200) NOT NULL,
-  `is_admin` tinyint(1) NOT NULL,
+  `is_admin` tinyint(1) NOT NULL DEFAULT 0,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;

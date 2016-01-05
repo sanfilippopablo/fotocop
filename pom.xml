@@ -50,6 +50,7 @@
       <artifactId>maven-failsafe-plugin</artifactId>
       <version>2.19</version>
       <type>maven-plugin</type>
+      <scope>test</scope>
     </dependency>
     <dependency>
       <groupId>org.seleniumhq.selenium</groupId>
@@ -109,6 +110,35 @@
               <outputDirectory>webapps</outputDirectory>
               <warName>ROOT</warName>
             </configuration>
+          </plugin>
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-surefire-plugin</artifactId>
+            <version>2.19.1</version>
+            <configuration>
+                <redirectTestOutputToFile>true</redirectTestOutputToFile>
+            </configuration>
+          </plugin>
+          <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-failsafe-plugin</artifactId>
+          <version>2.19.1</version>
+          <executions>
+            <execution>
+                <id>run-tests</id>
+                <phase>integration-test</phase>
+                <goals>
+                    <goal>integration-test</goal>
+                    <goal>verify</goal>
+                </goals>
+            </execution>
+        </executions>
+          <configuration>
+              <includes>
+                <include>UsersServiceIT.java</include>
+              </includes>
+              <redirectTestOutputToFile>true</redirectTestOutputToFile>
+          </configuration>
           </plugin>
         </plugins>
       </build>

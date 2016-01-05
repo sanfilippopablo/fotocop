@@ -103,6 +103,22 @@ public class A {
 
 El build system de los docs está configurado para incluir los docs del código automáticamente en la documentación generada por Sphinx.
 
+## Tests
+
+Los tests tienen que estar dentro de src/test/java/fotocop. Los unit tests tienen que tener el nombre a lo NombreTest.java. Los test de integración deben ser a lo NombreIT.java.
+
+Para correr todos los tests:
+````
+mvn verify
+````
+
+Para correr sólo los tests unitarios:
+````
+mvn test
+````
+
+Para que en los tests de integración se resetee la DB antes de cada Test, extender la clase del test de testutils.IntegrationBase.
+
 ## Notas adicionales
 
 Avisar siempre que haya un cambio al entorno (cambios en el Vagrantfile o en el scripts/setup_db.sql) para que todos actualicemos nuestros respectivos entornos con `vagrant provision`.
