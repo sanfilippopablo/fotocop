@@ -68,5 +68,31 @@ public class UsersService {
 			return user;
 		}
 	}
+	/**
+	 * Guarda un usuario dado en la DB, y lo devuelve. Si el user ya existe, devuelve AuthException
+	 * 
+	 * @param user
+	 * 
+	 * @throws AuthException
+	 * @throws SQLException 
+	 */
+	
+	public User createUser(User user) throws AuthException, SQLException {
+		
+		Connection connection = DBConnection.getConnection();
+		String sql = "IF NOT EXISTS (SELECT * FROM users WHERE (username = '?' OR email = '?)) INSERT INTO users (username, password, email) VALUES ('?', '?', '?');";
+		PreparedStatement statement = connection.prepareStatement(sql);
+		statement.setString(1, user.getUsername());
+		statement.setString(2, user.getEmail());
+		statement.setString(3, user.getUsername());
+		statement.setString(4, user.getHashedPassword());
+		statement.setString(5, user.getEmail());
+		ResultSet resultSet = statement.executeQuery();
+
+		if (resultSet.rowInserted() == false){
+			throw new AuthException("Ese nombre de usuario ya está registrado");
+		}
+		return user;
+	}
 
 }
