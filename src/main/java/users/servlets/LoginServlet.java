@@ -77,8 +77,10 @@ public class LoginServlet extends HttpServlet {
 				return;
 			}
 			catch (SQLException e) {
+				e.printStackTrace();
 				response.setStatus(500);
 				request.getRequestDispatcher("/500.html").forward(request, response);
+				return;
 			}
 			
 			// Actual login
