@@ -29,7 +29,6 @@ public class LoginServlet extends HttpServlet {
 	 * Por GET, este servlet sólo sirve la página web de login.
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Crear la página /login.jsp
 
 		// Si ya está logueado, redirigir al home
 		HttpSession session = request.getSession();
@@ -59,14 +58,9 @@ public class LoginServlet extends HttpServlet {
 
 		ValidationManager validationManager = new ValidationManager();
 
-		if (username == null || username.isEmpty()) {
-			validationManager.addError("username", "isEmpty");
-		}
-
-		if (password == null || password.isEmpty()) {
-			validationManager.addError("password", "isEmpty");
-		}
-
+		validationManager.validateNotEmpty("username", username);
+		validationManager.validateNotEmpty("password", password);
+		
 		if (validationManager.isValid()) {
 
 			UsersService usersService = new UsersService();
