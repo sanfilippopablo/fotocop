@@ -25,6 +25,9 @@ public class ValidationManagerTest {
 		vm.addError("field", "randomlySelectedErrorType");
 		assertNotNull("Debería haber un error con ese campo igual", vm.getErrors().get("field"));
 		
+		vm.addError("hola", "tooLong");
+		assertEquals("El error en el campo debería ser el primero insertado", "Este campo no puede estar vacío.", vm.errorForField("hola"));
+		
 	}
 	
 	@Test

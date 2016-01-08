@@ -11,6 +11,9 @@ import java.util.regex.Pattern;
  * los errores en una instancia de esta clase y luego, en el JSP, mostrar los errores
  * para cada campo.
  * 
+ * ValidationManager NO soporta campos con múltiples errores. Cuando más de un error
+ * se agrega a un campo, el error que se mantiene es el primero que se agregó.
+ * 
  * Los errores que no pertenecen a ningún campo se guardan en el campo *misc*.
  */
 public class ValidationManager {
@@ -40,7 +43,9 @@ public class ValidationManager {
 		if (!defaultMessages.containsKey(errorType)) {
 			errorType = "unknownError";
 		}
-		errors.put(field, defaultMessages.get(errorType));
+		if (!errors.containsKey(field)) {
+			errors.put(field, defaultMessages.get(errorType));
+		}
 	}
 	
 	/**
@@ -54,7 +59,9 @@ public class ValidationManager {
 	 * @param errorMessage
 	 */
 	public void addCustomError(String field, String errorMessage) {
-		errors.put(field, errorMessage);
+		if (!errors.containsKey(field)) {
+			errors.put(field, errorMessage);
+		}
 	}
 	
 	/**
