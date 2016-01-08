@@ -135,7 +135,7 @@
         </executions>
           <configuration>
               <includes>
-                <include>UsersServiceIT.java</include>
+                <include>*IT.java</include>
               </includes>
               <redirectTestOutputToFile>true</redirectTestOutputToFile>
           </configuration>

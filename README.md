@@ -109,7 +109,7 @@ Los tests tienen que estar dentro de src/test/java/fotocop. Los unit tests tiene
 
 Para correr todos los tests:
 ````
-mvn verify
+xvfb-run mvn verify
 ````
 
 Para correr sólo los tests unitarios:
