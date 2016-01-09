@@ -8,8 +8,8 @@ public class Job {
 	int id;
 	User user;
 	String status;
-	Date creation;
-	Date lastModified;
+	Date creationDate;
+	Date lastModifiedDate;
 	ArrayList<JobLine> jobLines;
 	Date eta;
 	public int getId() {
@@ -36,20 +36,20 @@ public class Job {
 		this.status = status;
 	}
 
-	public Date getCreation() {
-		return creation;
+	public Date getCreationDate() {
+		return creationDate;
 	}
 
-	public void setCreation(Date creation) {
-		this.creation = creation;
+	public void setCreationDate(Date creationDate) {
+		this.creationDate = creationDate;
 	}
 
-	public Date getLastModified() {
-		return lastModified;
+	public Date getLastModifiedDate() {
+		return lastModifiedDate;
 	}
 
-	public void setLastModified(Date lastModified) {
-		this.lastModified = lastModified;
+	public void setLastModifiedDate(Date lastModifiedDate) {
+		this.lastModifiedDate = lastModifiedDate;
 	}
 
 	public void setJobLines(ArrayList<JobLine> jobLines) {
