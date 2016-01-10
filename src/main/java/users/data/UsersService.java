@@ -69,6 +69,34 @@ public class UsersService {
 		}
 	}
 	/**
+	 * Devuelve un objeto User tomando como parámetro
+	 * el id.
+	 * 
+	 * @param id
+	 * @return User
+	 * @throws AuthException
+	 * @throws SQLException 
+	 */
+	public User getUserById(int id) throws AuthException, SQLException {
+		
+		Connection connection = DBConnection.getConnection();
+		String sql = "SELECT * FROM users WHERE id = ?;";
+		PreparedStatement statement = connection.prepareStatement(sql);
+		statement.setInt(1, id);
+		ResultSet resultSet = statement.executeQuery();
+		
+		if (!resultSet.next()) {
+			throw new AuthException("Usuario inexistente.");
+		}
+		else {
+			User user = new User();
+			user.setUsername(resultSet.getString("username"));
+			user.setEmail(resultSet.getString("email"));
+			user.setHashedPassword(resultSet.getString("password"));
+			return user;
+		}
+	}
+	/**
 	 * Guarda un usuario dado en la DB, y lo devuelve. Si el user ya existe, devuelve AuthException
 	 * 
 	 * @param user
