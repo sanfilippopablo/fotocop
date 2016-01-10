@@ -23,97 +23,65 @@ public class UsersServiceIT extends IntegrationBase {
 	}
 	
 	@Test
-	public void testAuthenticateWithCorrectData() {
+	public void testAuthenticateWithCorrectData() throws Exception {
 		
 		User user = null;
-		try {
-			user = usersService.authenticate("pablo", "123");
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+		user = usersService.authenticate("pablo", "123");
+		
 		assertNotNull("User should exist", user);
 		assertEquals("User should be the right one", user.getUsername(), "pablo");
 		
 	}
 	
-	@Test
-	public void testAuthenticateWithWrongPassword(){
-		try {
-			try {
-				User user = usersService.authenticate("pablo", "1dfwe23");
-				fail("La línea anterior debe tirar error");
-			} catch (AuthException e) {
-			}
-		} catch (Exception e) {
-		}
+	@Test(expected=AuthException.class)
+	public void testAuthenticateWithWrongPassword() throws AuthException, SQLException {
+		
+		usersService.authenticate("pablo", "1dfwe23");
+		
 	}
 
 	@Test
-	public void testGetUserByUsername() {
-		User user = null;
-		try {
-			user = usersService.getUserByUsername("pablo");
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+	public void testGetUserByUsername() throws AuthException, SQLException {
+		User user = usersService.getUserByUsername("pablo");
+		
 		assertNotNull("User should exist", user);
 		assertEquals("User should be the right one", user.getUsername(), "pablo");
 	}
 	@Test
-	public void testCreateUser() {
+	public void testCreateUser() throws AuthException, SQLException {
 		
 		User user = new User();
 		user.setUsername("chalo");
 		user.setEmail("gperfar@gmail.com");
 		user.setPassword("40222RTYU");
 		
-		try {
-			user = usersService.createUser(user);
-			user = null;
-			user = usersService.getUserByUsername("chalo");
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+		user = usersService.createUser(user);
+		user = null;
+		user = usersService.getUserByUsername("chalo");
+		
 		assertNotNull("User should have been registered", user);		
 	}
 
-	@Test
-	public void testCreateUserSameUsername() {
+	@Test(expected=AuthException.class)
+	public void testCreateUserSameUsername() throws AuthException, SQLException {
 		
 		User user = new User();
 		user.setUsername("pablo");
 		user.setEmail("gperfar@gmail.com");
 		user.setPassword("40222RTYU");
 	
-		try {	
-			try {
-				user = usersService.createUser(user);
-				fail("La línea anterior debe tirar error");
-			} catch (AuthException e) {
-				e.printStackTrace();
-			}
-		}
-		catch (Exception e){
-		}
+		user = usersService.createUser(user);
+				
 	}
 
-	@Test
-	public void testCreateUserSameEmail() {
+	@Test(expected=AuthException.class)
+	public void testCreateUserSameEmail() throws AuthException, SQLException {
 		
 		User user = new User();
 		user.setUsername("chalo");
 		user.setEmail("pablo@gmail.com");
 		user.setPassword("40222RTYU");
 	
-		try {	
-			try {
-				user = usersService.createUser(user);
-				fail("La línea anterior debe tirar error");
-			} catch (AuthException e) {
-				e.printStackTrace();
-			}
-		}
-		catch (Exception e){
-		}
+		user = usersService.createUser(user);
 	}
 }
