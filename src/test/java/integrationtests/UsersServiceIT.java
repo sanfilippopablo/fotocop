@@ -55,8 +55,8 @@ public class UsersServiceIT extends IntegrationBase {
 	public void testCreateUser() throws AuthException, SQLException {
 		
 		User user = new User();
-		user.setUsername("chalo");
-		user.setEmail("gperfar@gmail.com");
+		user.setUsername("sebabaskov");
+		user.setEmail("sebabaskov@gmail.com");
 		user.setPassword("40222RTYU");
 		
 		user = usersService.createUser(user);
