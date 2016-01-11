@@ -1,4 +1,4 @@
--- MySQL dump 10.16  Distrib 10.1.9-MariaDB, for Linux (x86_64)
+-- MySQL dump 10.13  Distrib 5.7.9, for osx10.9 (x86_64)
 --
 -- Host: 192.168.33.10    Database: fotocop
 -- ------------------------------------------------------
@@ -28,6 +28,7 @@ CREATE TABLE `jobs` (
   `status` varchar(45) DEFAULT NULL,
   `creationDate` datetime DEFAULT NULL,
   `lastModifiedDate` datetime DEFAULT NULL,
+  `eta` datetime DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `id_UNIQUE` (`id`),
   KEY `fk_1_idx` (`user`),
@@ -41,7 +42,7 @@ CREATE TABLE `jobs` (
 
 LOCK TABLES `jobs` WRITE;
 /*!40000 ALTER TABLE `jobs` DISABLE KEYS */;
-INSERT INTO `jobs` VALUES (1,1,'Abierto',NULL,NULL),(2,2,'Enviado',NULL,NULL),(3,1,'Listo',NULL,NULL),(4,2,'Retirado',NULL,NULL);
+INSERT INTO `jobs` VALUES (1,1,'Abierto',NULL,NULL,NULL),(2,2,'Enviado',NULL,NULL,NULL),(3,1,'Listo',NULL,NULL,NULL),(4,2,'Retirado',NULL,NULL,NULL);
 /*!40000 ALTER TABLE `jobs` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -61,7 +62,7 @@ CREATE TABLE `users` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `username_UNIQUE` (`username`),
   UNIQUE KEY `email_UNIQUE` (`email`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -70,7 +71,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (1,'pablo','$2a$08$rveeVqvtEkskz4hUZTZF2uV.L3xxKwRx9GU0s06gWAbR6P6DLVXrq','pablo@gmail.com',1),(2,'facundo','$2a$08$Nnf71JEfrx4jp8WUXg6Hdu82lRn3q4TF9NEH/wuJCwlMMJ4hUIeHa','facundo@gmail.com',0);
+INSERT INTO `users` VALUES (1,'pablo','$2a$08$rveeVqvtEkskz4hUZTZF2uV.L3xxKwRx9GU0s06gWAbR6P6DLVXrq','pablo@gmail.com',1),(2,'facundo','$2a$08$Nnf71JEfrx4jp8WUXg6Hdu82lRn3q4TF9NEH/wuJCwlMMJ4hUIeHa','facundo@gmail.com',0),(5,'chalo','$2a$12$JldENOHpIi1ygLkI54KIruOvHPpWU4VGEQ.AzEKO1OsffeKvn.HOa','gperfar@gmail.com',0);
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -83,4 +84,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-01-11  1:20:36
+-- Dump completed on 2016-01-11 14:04:24
