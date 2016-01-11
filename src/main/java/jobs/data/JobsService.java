@@ -3,7 +3,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.Calendar;
 import java.util.Date;
 
 import com.mysql.jdbc.Statement;
@@ -17,7 +16,8 @@ import users.exceptions.AuthException;
 public class JobsService {
 	
 	/**
-	 * Crea el Job en la DB (con el user asignado) y lo devuelve.
+	 * Crea el Job en la DB (con el user asignado) y lo devuelve
+	 * con el ID asignado por la DB.
 	 * 
 	 * @param user
 	 * @throws SQLException 
@@ -32,20 +32,20 @@ public class JobsService {
 		job.setUser(user);
 		job.setStatus("Abierto");
 		
-		String sql = "INSERT INTO jobs (user, creationDate, lastModifiedDate, status) VALUES ((SELECT id FROM users WHERE username = ?), ?, ?,?);";
+		String sql = "INSERT INTO jobs(`user`, `creationDate`, `lastModifiedDate`, `status`) VALUES (?, ?, ?, ?);";
 		PreparedStatement ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-		ps.setString(1, user.getUsername());
-		java.sql.Date date = new java.sql.Date(Calendar.getInstance().getTime().getTime());
-		ps.setDate(2, date);
-		ps.setDate(3, date);
-		ps.setString(4, job.getStatus());
-		ps.executeUpdate(sql);
-		ResultSet rs = ps.getGeneratedKeys();
 		
-		if (rs.rowInserted() == false){
-			throw new AuthException("No se pudo agregrar el trabajo a la DB");
-		}
-		job.setId(rs.getInt("id"));
+		ps.setInt(1, user.getId());
+		ps.setTimestamp(2, new java.sql.Timestamp(job.getCreationDate().getTime()));
+		ps.setTimestamp(3, new java.sql.Timestamp(job.getLastModifiedDate().getTime()));
+		ps.setString(4, job.getStatus());
+		
+		ps.executeUpdate();
+		
+		ResultSet rs = ps.getGeneratedKeys();
+		rs.next();
+		job.setId(rs.getInt(1));
+		
 		return job;
 
 	}
