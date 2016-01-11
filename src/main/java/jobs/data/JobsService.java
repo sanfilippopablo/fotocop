@@ -3,6 +3,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Date;
 
 import com.mysql.jdbc.Statement;
@@ -47,7 +48,6 @@ public class JobsService {
 		job.setId(rs.getInt(1));
 		
 		return job;
-
 	}
 	
 	/**
@@ -76,6 +76,33 @@ public class JobsService {
 			job.setUser(us.getUserById(resultSet.getInt("id")));
 			return job;
 			}
-	
+	}
+	/**
+	 * Ubica los trabajos pendientes de un usuario dado y los devuelve en un ArrayList.
+	 * 
+	 * @param u
+	 * @throws SQLException 
+	 */ 
+	public ArrayList<Job> getPendingJobsForUser(User u) throws SQLException{
+		ArrayList<Job> pendingJobs = new ArrayList<Job>();
+		Connection connection = DBConnection.getConnection();
+		String sql = "SELECT * FROM jobs WHERE user = ? AND (status <> 'Retirado');";
+		PreparedStatement statement = connection.prepareStatement(sql);
+		statement.setInt(1, u.getId());
+		ResultSet resultSet = statement.executeQuery();
+		
+		while (resultSet.next()) {
+			Job auxJob = new Job();
+			auxJob.setId(resultSet.getInt("id"));
+			auxJob.setStatus(resultSet.getString("status"));
+			auxJob.setUser(u);
+			auxJob.setCreationDate(resultSet.getTimestamp("creationDate"));
+			auxJob.setEta(resultSet.getTimestamp("eta"));
+			auxJob.setLastModifiedDate(resultSet.getTimestamp("lastModifiedDate"));
+		
+			pendingJobs.add(auxJob);
+		}
+		
+		return pendingJobs;
 	}
 }

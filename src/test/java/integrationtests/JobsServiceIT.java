@@ -1,8 +1,11 @@
 package integrationtests;
 import static org.junit.Assert.*;
 
+import java.util.ArrayList;
+
 import org.junit.Before;
 import org.junit.Test;
+
 
 
 //import testutils.IntegrationBase;
@@ -39,5 +42,15 @@ public class JobsServiceIT {
 		job = js.getJobById(1);
 		assertNotNull("Job should exist", job);
 		assertEquals("Job should be the right one", job.getId(), 1);
+	}
+	
+	@Test
+	public void testGetPendingJobsForUser() throws Exception{
+		ArrayList<Job> pendingJobs = null;
+		UsersService us = new UsersService();
+		JobsService js = new JobsService();
+		User user = us.getUserById(1);
+		pendingJobs = js.getPendingJobsForUser(user);
+		assertNotNull("Pending jobs array should have been created", pendingJobs);
 	}
 }
