@@ -62,6 +62,7 @@ public class UsersService {
 		}
 		else {
 			User user = new User();
+			user.setId(resultSet.getInt("id"));
 			user.setUsername(username);
 			user.setEmail(resultSet.getString("email"));
 			user.setHashedPassword(resultSet.getString("password"));
@@ -90,6 +91,7 @@ public class UsersService {
 		}
 		else {
 			User user = new User();
+			user.setId(resultSet.getInt("id"));
 			user.setUsername(resultSet.getString("username"));
 			user.setEmail(resultSet.getString("email"));
 			user.setHashedPassword(resultSet.getString("password"));
@@ -97,7 +99,9 @@ public class UsersService {
 		}
 	}
 	/**
-	 * Guarda un usuario dado en la DB, y lo devuelve. Si el user ya existe, devuelve AuthException
+	 * Guarda un usuario dado en la DB, y lo devuelve. El user devuelto,
+	 * vuelve con el ID generado por la DB. Si ya existe un user con el
+	 * mismo username o email, tira AuthException.
 	 * 
 	 * @param user
 	 * 
@@ -109,7 +113,7 @@ public class UsersService {
 		
 		Connection connection = DBConnection.getConnection();
 		String sql = "INSERT INTO users (username, password, email) VALUES (?, ?, ?);";
-		PreparedStatement statement = connection.prepareStatement(sql);
+		PreparedStatement statement = connection.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS);
 
 		statement.setString(1, user.getUsername());
 		statement.setString(2, user.getHashedPassword());
@@ -117,6 +121,9 @@ public class UsersService {
 		
 		try {
 			statement.executeUpdate();
+			ResultSet resultSet = statement.getGeneratedKeys();
+			resultSet.next();
+			user.setId(resultSet.getInt(1));
 		} catch (SQLException e) {
 			if (e.getErrorCode() == 1062) {
 				throw new AuthException(e.getMessage());

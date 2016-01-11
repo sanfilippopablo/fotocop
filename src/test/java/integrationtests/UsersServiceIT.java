@@ -45,7 +45,11 @@ public class UsersServiceIT extends IntegrationBase {
 		User user = usersService.getUserByUsername("pablo");
 		
 		assertNotNull("User should exist", user);
+		
 		assertEquals("User should be the right one", user.getUsername(), "pablo");
+		assertTrue("User should have a password", user.checkPassword("123"));
+		assertEquals("User should have an ID", user.getId(), 1);
+		assertEquals("User should have email", user.getEmail(), "pablo@gmail.com");
 	}
 	@Test
 	public void testCreateUser() throws AuthException, SQLException {
@@ -56,6 +60,9 @@ public class UsersServiceIT extends IntegrationBase {
 		user.setPassword("40222RTYU");
 		
 		user = usersService.createUser(user);
+		
+		assertNotNull("User should come back with a generated ID", user.getId());
+		
 		user = null;
 		user = usersService.getUserByUsername("chalo");
 		
