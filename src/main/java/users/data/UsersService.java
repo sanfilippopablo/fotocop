@@ -108,18 +108,24 @@ public class UsersService {
 	public User createUser(User user) throws AuthException, SQLException {
 		
 		Connection connection = DBConnection.getConnection();
-		String sql = "IF NOT EXISTS (SELECT * FROM users WHERE (username = '?' OR email = '?)) INSERT INTO users (username, password, email) VALUES ('?', '?', '?');";
+		String sql = "INSERT INTO users (username, password, email) VALUES (?, ?, ?);";
 		PreparedStatement statement = connection.prepareStatement(sql);
-		statement.setString(1, user.getUsername());
-		statement.setString(2, user.getEmail());
-		statement.setString(3, user.getUsername());
-		statement.setString(4, user.getHashedPassword());
-		statement.setString(5, user.getEmail());
-		ResultSet resultSet = statement.executeQuery();
 
-		if (resultSet.rowInserted() == false){
-			throw new AuthException("Ese nombre de usuario ya está registrado");
+		statement.setString(1, user.getUsername());
+		statement.setString(2, user.getHashedPassword());
+		statement.setString(3, user.getEmail());
+		
+		try {
+			statement.executeUpdate();
+		} catch (SQLException e) {
+			if (e.getErrorCode() == 1062) {
+				throw new AuthException(e.getMessage());
+			}
+			else {
+				throw e;
+			}
 		}
+
 		return user;
 	}
 
