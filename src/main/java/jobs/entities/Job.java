@@ -61,6 +61,9 @@ public class Job {
 		return jobLines;
 	}
 
+	public void addJobLine(JobLine jl){
+		this.jobLines.add(jl);
+	}
 	public Date getEta() {
 		return eta;
 	}
