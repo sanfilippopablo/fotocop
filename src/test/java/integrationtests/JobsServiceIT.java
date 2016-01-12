@@ -8,11 +8,15 @@ import org.junit.Test;
 
 
 
+
+
 //import testutils.IntegrationBase;
 import users.data.UsersService;
 import users.entities.User;
 import jobs.data.JobsService;
+import jobs.entities.File;
 import jobs.entities.Job;
+import jobs.entities.JobLine;
 
 public class JobsServiceIT {
 	JobsService jobsService;
@@ -52,5 +56,27 @@ public class JobsServiceIT {
 		User user = us.getUserById(1);
 		pendingJobs = js.getPendingJobsForUser(user);
 		assertNotNull("Pending jobs array should have been created", pendingJobs);
+	}
+	@Test 
+	public void testAddJobLine() throws Exception{
+		Job j = new Job();
+		JobLine jl = new JobLine();
+		j.addJobLine(jl);
+		assertTrue("JobLine should have been added to job", j.getJobLines().size() >0);
+	}
+	@Test
+	public void testAddJobLineToJob() throws Exception{
+		JobsService js = new JobsService();
+		Job j = new Job();
+		JobLine jl = new JobLine();
+		File f = new File();
+		f.setId(3);
+		jl.setFile(f);
+		jl.setAbrochado(false);
+		jl.setQuantity(3);
+		jl.setDobleFaz(true);
+		jl.setAnillado(false);
+		js.addJobLineToJob(j, jl);
+		assertTrue("JobLine should have been added to the Job and registered in the DB", j.getJobLines().size() > 0);
 	}
 }

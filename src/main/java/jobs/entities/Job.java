@@ -10,7 +10,7 @@ public class Job {
 	String status;
 	Date creationDate;
 	Date lastModifiedDate;
-	ArrayList<JobLine> jobLines;
+	ArrayList<JobLine> jobLines = new ArrayList<JobLine>();
 	Date eta;
 	public int getId() {
 		return id;

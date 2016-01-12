@@ -9,6 +9,7 @@ import java.util.Date;
 import com.mysql.jdbc.Statement;
 
 import jobs.entities.Job;
+import jobs.entities.JobLine;
 import common.DBConnection;
 import users.data.UsersService;
 import users.entities.User;
@@ -102,7 +103,27 @@ public class JobsService {
 		
 			pendingJobs.add(auxJob);
 		}
-		
 		return pendingJobs;
+	}
+	
+	/**
+	 * Agrega una JobLine dada a un Job dado y lo registra en la DB.
+	 * 
+	 * @param j, jl
+	 * @throws SQLException 
+	 */ 
+	public void addJobLineToJob(Job j, JobLine jl) throws SQLException{
+		//Lo agregamos al job
+		j.addJobLine(jl);
+		//Lo agregamos a la DB
+				Connection connection = DBConnection.getConnection();
+				String sql = "INSERT INTO joblines(`file`, `quantity`, `abrochado`, `anillado`, `dobleFaz`) VALUES (?, ?, ?, ?, ?);";
+				PreparedStatement ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+				ps.setInt(1, jl.getFile().getId());
+				ps.setInt(2, jl.getQuantity());
+				ps.setBoolean(3, jl.isAbrochado());
+				ps.setBoolean(4, jl.isAnillado());
+				ps.setBoolean(5, jl.isDobleFaz());
+				ps.executeUpdate();
 	}
 }
