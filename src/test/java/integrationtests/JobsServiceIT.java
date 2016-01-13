@@ -79,4 +79,13 @@ public class JobsServiceIT {
 		js.addJobLineToJob(j, jl);
 		assertTrue("JobLine should have been added to the Job and registered in the DB", j.getJobLines().size() > 0);
 	}
+	@Test
+	public void testSubmitJob() throws Exception{
+		JobsService js = new JobsService();
+		Job j = js.getJobById(1);
+		JobLine jl = new JobLine(); jl.setQuantity(3); //Se usa en el método getPrintingTime de Job
+		j.addJobLine(jl);
+		js.submitjob(j);
+		assertEquals("Job should have a 'Sent' status", j.getStatus(),"Enviado");
+	}
 }

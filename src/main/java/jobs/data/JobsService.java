@@ -16,7 +16,6 @@ import users.entities.User;
 import users.exceptions.AuthException;
 
 public class JobsService {
-	
 	/**
 	 * Crea el Job en la DB (con el user asignado) y lo devuelve
 	 * con el ID asignado por la DB.
@@ -50,7 +49,6 @@ public class JobsService {
 		
 		return job;
 	}
-	
 	/**
 	 * Ubica un Job a partir de su id y lo devuelve.
 	 * 
@@ -105,7 +103,6 @@ public class JobsService {
 		}
 		return pendingJobs;
 	}
-	
 	/**
 	 * Agrega una JobLine dada a un Job dado y lo registra en la DB.
 	 * 
@@ -116,14 +113,56 @@ public class JobsService {
 		//Lo agregamos al job
 		j.addJobLine(jl);
 		//Lo agregamos a la DB
-				Connection connection = DBConnection.getConnection();
-				String sql = "INSERT INTO joblines(`file`, `quantity`, `abrochado`, `anillado`, `dobleFaz`) VALUES (?, ?, ?, ?, ?);";
-				PreparedStatement ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-				ps.setInt(1, jl.getFile().getId());
-				ps.setInt(2, jl.getQuantity());
-				ps.setBoolean(3, jl.isAbrochado());
-				ps.setBoolean(4, jl.isAnillado());
-				ps.setBoolean(5, jl.isDobleFaz());
-				ps.executeUpdate();
+			Connection connection = DBConnection.getConnection();
+			String sql = "INSERT INTO joblines(`file`, `quantity`, `abrochado`, `anillado`, `dobleFaz`) VALUES (?, ?, ?, ?, ?);";
+			PreparedStatement ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+			ps.setInt(1, jl.getFile().getId());
+			ps.setInt(2, jl.getQuantity());
+			ps.setBoolean(3, jl.isAbrochado());
+			ps.setBoolean(4, jl.isAnillado());
+			ps.setBoolean(5, jl.isDobleFaz());
+			ps.executeUpdate();
+	}
+	/**
+	 * Cambia el estado del Job a Enviado, calcula y setea un ETA, y registra en la DB.
+	 * 
+	 * @param j
+	 * @throws SQLException 
+	 */ 
+	public void submitjob(Job j) throws SQLException{
+		JobsService js = new JobsService();
+		j.setStatus("Enviado");
+		j.setLastModifiedDate(new Date());
+		Date eta = new Date();
+		//Calculamos eta siendo igual al momento actual + lo que tarde en imprimirse el actual trabajo + lo que tardan en imprimirse los trabajos enviados
+		long readyToPickupTime = j.getPrintingTime() + js.getSentJobsTime(); 
+		eta.setTime(eta.getTime() + readyToPickupTime);
+		j.setEta(eta);
+		//Guardamos en la DB
+		Connection connection = DBConnection.getConnection();
+		String sql = "UPDATE jobs SET status = ?, eta = ?, lastModifiedDate = ?  WHERE id = ? ";
+		PreparedStatement ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+		ps.setString(1, j.getStatus());
+		ps.setTimestamp(2, new java.sql.Timestamp(j.getEta().getTime()));
+		ps.setTimestamp(3, new java.sql.Timestamp(j.getLastModifiedDate().getTime()));
+		ps.setInt(4, j.getId());
+		ps.executeUpdate();	
+	}
+	/**
+	 * Calcula y devuelve el tiempo que se tarda en imprimir los trabajos enviados.
+	 * 
+	 * @param j
+	 * @throws SQLException 
+	 */ 
+	public long getSentJobsTime() throws SQLException{
+		long pendingJobsTime = 0;
+		Connection connection = DBConnection.getConnection();
+		String sql = "SELECT eta FROM jobs WHERE status = 'Enviado';";
+		PreparedStatement statement = connection.prepareStatement(sql);
+		ResultSet resultSet = statement.executeQuery();
+		while (resultSet.next()) {
+			pendingJobsTime += resultSet.getLong("eta");
+		}
+		return pendingJobsTime;
 	}
 }
