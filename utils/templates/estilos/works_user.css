@@ -7,19 +7,149 @@ hgroup {
 	margin: 0;
 }
 
+.title {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	align-items: center;
+	align-content: center; 
+	flex-flow: row wrap;
+}
+
+.item {
+	
+}
+
+.item-primary {
+	display: flex;
+	flex-direction: column;
+	flex-wrap: wrap;
+	align-items: center;
+	margin: 0;
+
+}
+
+.item-primary h4 {
+	text-align: center;
+	margin: 1em;
+}
+
+.item-primary p {
+	margin-top: .1em;	
+	text-align: center;
+}
+
+.item-second {
+	margin-right: 4em;
+	margin-left: 4em;
+}
+
+
+.row {
+	margin: 0;
+}
+
+.block {
+	display: block;
+}
+
+.flex {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.center {
+	text-align: center;
+}
+
+h4.card-title {
+	font-family: sans-serif;
+}
+
+p.flow-text {
+	font-size: 1.2em;
+}
+
 li.active{
 	background-color: #004d40;
+}
+
+
+.card {
+	margin: 1.5rem 0 1.5rem 0;
+}
+
+.icon-card {
+	padding: .4em;
+}
+
+.card-action {
+	background-color: green;
+}
+
+.card-action:hover {
+	background-color: green;
+    opacity: 0.4;
+    filter: alpha(opacity=40); /* For IE8 and earlier */
+}
+
+.card-principal-contenido {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	margin-bottom: 1em;
+}
+
+img.hover {
+	opacity: 0.4;
+    filter: alpha(opacity=40); /* For IE8 and earlier */
+}
+
+img.hover:hover {
+    opacity: 1;
+    filter: alpha(opacity=100); /* For IE8 and earlier */
 }
 
 footer.no-margin-top { 
 	margin-top: 0px;
 }
 
-
+/* Para pantallas medianas */
+@media only screen and (min-width: 600px){
+	.title {
+		justify-content: space-between;
+	}
+}
 
 /* Para pantallas grandes */
 @media only screen and (min-width: 992px){
+	
 	h1, h2, h3, h4, h5, h6 {
 		margin: 10px;
 	}
+
+	.container {
+		width: 85%;
+	}
+
+	.icon-card {
+		margin-right: .5em;
+		padding: .2em;
+	}
+
+	.flex {
+		display: flex;
+		justify-content: space-between;
+		flex-direction: row;
+	}
+
+	.card-principal-contenido {
+		align-items: flex-start;
+	}
+
+	.card-principal-contenido p.center {
+		margin-left: 3.3em;
+	}
+
 }

@@ -24,6 +24,7 @@
 							<li><a href="#">Cerrar Sesión</a></li>
 						</ul>
 						<ul class="side-nav" id="mobile-demo">
+							<li class="active"><a href="works_user.html">Trabajos <span class="new badge red">1</span></a></li>
 							<li><a href="#">Apuntes</a></li>
 							<li><a href="#">Cerrar Sesión</a></li>
 							<li><a href="works_user.html">Volver</a></li>
@@ -35,88 +36,104 @@
 
 		<main class="grey lighten-3">
 			<div class="container">
-
 				<hgroup>
-					<ul class="row">
-						<li class="input-field col s12 m10">
-							<h4 class="col s10">Trabajos Pendientes</h4>
-						</li>
-						<li class="input-field col s12 m2">
-							<a id="addbutton" class="btn-floating btn-large waves-effect waves-light red tooltipped" data-position="right" data-delay="50" data-tooltip="Agregar trabajo">
-								<i class="material-icons">
-									add
-								</i>
-							</a>
-						</li>
-					</ul>
+					<div class="row">
+						<div class="title">
+							<div class="item item-primary">
+								<h4>Trabajos</h4>
+							</div>
+							<a class="btn-floating btn-large waves-effect waves-light red item item-second"><i class="material-icons">add</i></a>	
+						</div>
+					</div>
 				</hgroup>
-				<hr>
-				<br>
-   
-				<ul class="collection">
-
-				    <li class="collection-item avatar">
-						<i class="material-icons circle red">done_all</i>
-						<span class="title">ID: 35685</span>
-						<p>Listo para retirar</p>
-						<a class="waves-effect waves-light btn modal-trigger secondary-content" href="#modal1">Detalles</a>
-
-
-						<!-- Modal Structure -->
-						  <div id="modal1" class="modal">
-						    <div class="modal-content">
-						      <h4>Modal Header</h4>
-						      <p>A bunch of text</p>
-						    </div>
-						    <div class="modal-footer">
-						      <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">Agree</a>
-						    </div>
-						  </div>
-				    </li>
-				    <li class="collection-item avatar">
-						<i class="material-icons circle green">schedule</i>
-						<span class="title">ID: 35679</span>
-						<p>No enviado</p>
-						<a class="waves-effect waves-light btn secondary-content">Detalles</a>
-				    </li>
-				    <li class="collection-item avatar">
-						<i class="material-icons circle green">schedule</i>
-						<span class="title">ID: 35687</span>
-						<p>No enviado</p>
-						<a class="waves-effect waves-light btn secondary-content">Detalles</a>
-				    </li>
-				    <li class="collection-item avatar">
-						<i class="material-icons circle blue">done</i>
-						<span class="title">ID: 35684</span>
-						<p>Retirar en 2 horas</p>
-						<a class="waves-effect waves-light btn secondary-content">Detalles</a>
-				    </li>
-				    <li class="collection-item avatar">
-						<i class="material-icons circle blue">done</i>
-						<span class="title">ID: 35681</span>
-						<p>Retirar en 2 horas</p>
-						<a class="waves-effect waves-light btn secondary-content">Detalles</a>
-				    </li>					    
-				    <li class="collection-item avatar">
-						<i class="material-icons circle blue">done</i>
-						<span class="title">ID: 35690</span>
-						<p>Retirar en 2 horas</p>
-						<a class="waves-effect waves-light btn secondary-content">Detalles</a>
-				    </li>
-				</ul>
-				
-          				<div class="row card">
-            				<div class="col s12 m8 card-content">
-              					<i class="material-icons circle blue">done</i>
-								<span class="title">ID: 35690</span>
-								<p>Retirar en 2 horas</p>
-            				</div>
-            				<div class="col s12 m4 card-action right-align">
-				              	<a class="waves-effect waves-light btn">Detalles</a>
-            				</div>
-          				</div>
-
-
+				<hr />
+				<br />
+				<div>
+					<div class="col s12 m6 l4">
+				      	<div class="card" style="border-left: 5px solid red;">
+				        	<div class="card-content flex">
+				          		<div class="card-principal-contenido">
+					          		<div class="flex">
+					          			<i class="material-icons circle red icon-card">done_all</i>
+					          			<h4 class="card-title center black-text text-darken-2">Libro de Sistemas Operativos</h4>
+									</div>
+				          			<p class="center flow-text red-text block">Listo para retirar por fotocopiadora.</p>
+				          		</div>
+				          		<a href="#" class="waves-effect waves-light btn">Detalles</a>
+				        	</div>
+				      	</div>
+				    </div>
+				    <div class="col s12 m6 l4">
+				      	<div class="card" style="border-left: 5px solid green;">
+				        	<div class="card-content flex">
+				          		<div class="card-principal-contenido">
+				          			<div class="flex">
+				          				<i class="material-icons circle green icon-card">done</i>
+				          				<h4 class="card-title center black-text text-darken-2">Resumen de ISW</h4>
+				          			</div>
+				          			<p class="center flow-text green-text block">Retirar a las 9:00hs. del 12/05/2016.</p>
+				          		</div>
+				          		<a href="#" class="waves-effect waves-light btn">Detalles</a>
+				        	</div>
+				      	</div>
+				    </div>
+				    <div class="col s12 m6 l4">
+				      	<div class="card" style="border-left: 5px solid blue;">
+				        	<div class="card-content flex">
+				          		<div class="card-principal-contenido">
+				          			<div class="flex">
+				          				<i class="material-icons circle blue icon-card">schedule</i>
+				          				<h4 class="card-title center black-text text-darken-2">Apunte de Matemáticas Superior</h4>
+				          			</div>
+				          			<p class="center flow-text blue-text block">Todavía no enviado.</p>
+				          		</div>
+				          		<a href="#" class="waves-effect waves-light btn">Detalles</a>
+				        	</div>
+				      	</div>
+				    </div>
+				    <div class="col s12 m6 l4">
+				      	<div class="card" style="border-left: 5px solid red;">
+				        	<div class="card-content flex">
+				          		<div class="card-principal-contenido">
+					          		<div class="flex">
+					          			<i class="material-icons circle red icon-card">done_all</i>
+					          			<h4 class="card-title center black-text text-darken-2">Libro de Sistemas Operativos</h4>
+									</div>
+				          			<p class="center flow-text red-text block">Listo para retirar por fotocopiadora.</p>
+				          		</div>
+				          		<a href="#" class="waves-effect waves-light btn">Detalles</a>
+				        	</div>
+				      	</div>
+				    </div>
+				    <div class="col s12 m6 l4">
+				      	<div class="card" style="border-left: 5px solid green;">
+				        	<div class="card-content flex">
+				          		<div class="card-principal-contenido">
+				          			<div class="flex">
+				          				<i class="material-icons circle green icon-card">done</i>
+				          				<h4 class="card-title center black-text text-darken-2">Resumen de ISW</h4>
+				          			</div>
+				          			<p class="center flow-text green-text block">Retirar a las 9:00hs. del 12/05/2016.</p>
+				          		</div>
+				          		<a href="#" class="waves-effect waves-light btn">Detalles</a>
+				        	</div>
+				      	</div>
+				    </div>
+				    <div class="col s12 m6 l4">
+				      	<div class="card" style="border-left: 5px solid blue;">
+				        	<div class="card-content flex">
+				          		<div class="card-principal-contenido">
+				          			<div class="flex">
+				          				<i class="material-icons circle blue icon-card">schedule</i>
+				          				<h4 class="card-title center black-text text-darken-2">Apunte de Matemáticas Superior</h4>
+				          			</div>
+				          			<p class="center flow-text blue-text block">Todavía no enviado.</p>
+				          		</div>
+				          		<a href="#" class="waves-effect waves-light btn">Detalles</a>
+				        	</div>
+				      	</div>
+				    </div>
+				</div>
 			</div>
 
 		</main>
