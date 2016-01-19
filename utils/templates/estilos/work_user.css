@@ -1,0 +1,24 @@
+
+
+
+
+
+/* Para pantallas medianas */
+@media only screen and (min-width: 600px){
+	.title {
+		justify-content: space-between;
+	}
+}
+
+/* Para pantallas grandes */
+@media only screen and (min-width: 992px){
+	
+	h1, h2, h3, h4, h5, h6 {
+		margin: 10px;
+	}
+
+	.container {
+		width: 85%;
+	}
+
+}
