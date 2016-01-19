@@ -10,6 +10,16 @@ public class File {
 	int id;
 	String name;
 	String path;
+	
+	long length;
+	
+	public long getLength() {
+		return length;
+	}
+	
+	public void setLength(long length) {
+		this.length = length;
+	}
 
 	public int getId() {
 		return id;

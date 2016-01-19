@@ -1,4 +1,4 @@
--- MySQL dump 10.13  Distrib 5.7.9, for osx10.9 (x86_64)
+-- MySQL dump 10.16  Distrib 10.1.10-MariaDB, for Linux (x86_64)
 --
 -- Host: 192.168.33.10    Database: fotocop
 -- ------------------------------------------------------
@@ -23,10 +23,10 @@ DROP TABLE IF EXISTS `files`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `files` (
-  `id` int(11) NOT NULL,
-  `name` varchar(45) DEFAULT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(45) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -138,4 +138,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-01-12 16:09:18
+-- Dump completed on 2016-01-18 19:04:49
