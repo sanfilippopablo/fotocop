@@ -24,7 +24,7 @@ public class JobsService {
 	 * @throws SQLException 
 	 * @throws AuthException 
 	 */ 
-	public Job createJobForUser(User user) throws SQLException, AuthException{
+	public Job createJobForUser(User user) throws SQLException {
 		Job job = new Job();
 		job.setCreationDate(new Date());
 		job.setLastModifiedDate(new Date());

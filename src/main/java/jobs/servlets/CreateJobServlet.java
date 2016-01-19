@@ -73,7 +73,7 @@ public class CreateJobServlet extends HttpServlet {
 		Job job;
 		try {
 			job = jobsService.createJobForUser(user);
-		} catch (SQLException | AuthException e) {
+		} catch (SQLException e) {
 			e.printStackTrace();
 			throw new ServletException();
 		}
