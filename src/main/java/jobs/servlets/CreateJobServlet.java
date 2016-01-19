@@ -19,6 +19,8 @@ import users.exceptions.AuthException;
  * Crea un nuevo trabajo para el user en sesión y lo manda a la
  * página de ese trabajo si no tiene uno ya creado. Si resulta que
  * el user en sesión ya tiene un trabajo abierto, lo manda a ese.
+ * 
+ * No renderiza ningún JSP, sólo hace redirecciones.
  */
 @WebServlet("/CreateJobServlet")
 public class CreateJobServlet extends HttpServlet {
