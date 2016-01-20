@@ -6,9 +6,11 @@
 		<meta charset="utf-8">
 		<title>Fotocop</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<!-- 
 	 	<link rel="stylesheet" href="https://storage.googleapis.com/code.getmdl.io/1.0.6/material.indigo-pink.min.css">
 	 	<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 	 	<link rel="stylesheet" href="/estilos/login.css">
+	 	 -->
 	</head>
 	<body>
 		<!-- Always shows a header, even in smaller screens. -->
@@ -36,7 +38,9 @@
 
 
 			    	<!-- Formulario de Login -->
-			        <form action="login" method="post">
+			        <form action="/login" method="post">
+			        
+			        	<input type="hidden" name="next" value="${next}" />
 			        
 							<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label group">
 						    	<input class="mdl-textfield__input" type="text" name="username" value="<c:out value='${param.username}' />" />
@@ -63,7 +67,7 @@
 
 		<!-- Scripts -->
 
-		<script src="https://storage.googleapis.com/code.getmdl.io/1.0.6/material.min.js"></script>
+	<!-- 		<script src="https://storage.googleapis.com/code.getmdl.io/1.0.6/material.min.js"></script> -->
 	
 	</body>
 </html>

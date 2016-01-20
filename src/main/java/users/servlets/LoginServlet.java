@@ -39,6 +39,7 @@ public class LoginServlet extends HttpServlet {
 
 		session.setAttribute("isLogged", false);
 		// Servir login page
+		request.setAttribute("next", request.getParameter("next"));
 		request.getRequestDispatcher("/login.jsp").forward(request, response);
 		
 	}
@@ -53,6 +54,7 @@ public class LoginServlet extends HttpServlet {
 
 		String username = request.getParameter("username");
 		String password = request.getParameter("password");
+		String next = request.getParameter("next");
 
 		// Single field validations
 
@@ -73,6 +75,7 @@ public class LoginServlet extends HttpServlet {
 				// Authentication failed
 				validationManager.addCustomError("misc", e.getMessage());
 				request.setAttribute("validationManager", validationManager);
+				request.setAttribute("next", next);
 				request.getRequestDispatcher("/login.jsp").forward(request, response);
 				return;
 			}
@@ -86,10 +89,19 @@ public class LoginServlet extends HttpServlet {
 			// Actual login
 			HttpSession session = request.getSession();
 			session.setAttribute("isLogged", true);
-			session.setAttribute("user", user);
-			response.sendRedirect("/");
+			session.setAttribute("userId", user.getId());
+			
+			String url;
+			if (next != null) {
+				url = next;
+			}
+			else {
+				url = "/";
+			}
+			response.sendRedirect(url);
 
 		} else {
+			request.setAttribute("next", next);
 			request.setAttribute("validationManager", validationManager);
 			request.getRequestDispatcher("/login.jsp").forward(request, response);
 		}
