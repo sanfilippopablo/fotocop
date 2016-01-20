@@ -24,6 +24,16 @@
     margin: 2em;
 }
 
+.cancelar {
+    width: 300px;
+    margin: .75rem;
+}
+
+.send {
+    width: 300px;
+    margin: .75rem;
+}
+
 .input-field p {
     display: block;
     width: 100px;
@@ -50,6 +60,10 @@
         align-items: flex-end;
     }
     
+    .flex-button {
+        justify-content: space-around;
+    }
+    
     .title-work {
         margin: 2rem;
         height: 54px;
@@ -67,6 +81,16 @@
     .name-file {
         width: 300px;
         text-align: left;
+    }
+    
+    .cancelar {
+        margin: 1.5rem;
+    }
+    
+    .send {
+        margin: 1.5rem;
+    }
+
 }
 
 /* Para pantallas grandes */
@@ -79,5 +103,13 @@
 	.container {
 		width: 85%;
 	}
+    
+    .cancelar {
+        margin: 3rem;
+    }
+    
+    .send {
+        margin: 3rem;
+    }
 
 }
