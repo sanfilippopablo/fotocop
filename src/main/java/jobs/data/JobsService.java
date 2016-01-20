@@ -63,7 +63,7 @@ public class JobsService {
 	 * @throws NotFoundException 
 	 * @throws AuthException 
 	 */ 
-	public Job getJobById(int id) throws SQLException, NotFoundException, AuthException{
+	public Job getJobById(int id) throws SQLException, NotFoundException{
 		try(Connection connection = DBConnection.getConnection()){
 			String sql = "SELECT * FROM jobs WHERE id = ?;";
 			PreparedStatement statement = connection.prepareStatement(sql);
@@ -78,7 +78,11 @@ public class JobsService {
 					job.setId(id);
 					job.setCreationDate(resultSet.getDate("creationDate"));
 					job.setLastModifiedDate(resultSet.getDate("lastModifiedDate"));
-					job.setUser(us.getUserById(resultSet.getInt("id")));
+					try {
+						job.setUser(us.getUserById(resultSet.getInt("id")));
+					} catch (AuthException e) {
+						e.printStackTrace();
+					}
 					return job;
 				}
 			}
