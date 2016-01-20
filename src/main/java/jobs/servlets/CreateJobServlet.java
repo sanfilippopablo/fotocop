@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import common.servlets.LoginRequiredServlet;
 import jobs.data.JobsService;
 import jobs.entities.Job;
 import users.entities.User;
@@ -22,8 +23,7 @@ import users.exceptions.AuthException;
  * 
  * No renderiza ningún JSP, sólo hace redirecciones.
  */
-@WebServlet("/CreateJobServlet")
-public class CreateJobServlet extends HttpServlet {
+public class CreateJobServlet extends LoginRequiredServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
@@ -47,13 +47,7 @@ public class CreateJobServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		// Si no está logueado, mandarlo a la página de login.
-		if (! (Boolean) request.getSession().getAttribute("isLogged")) {
-			response.sendRedirect("/login");
-			return;
-		}
-		
-		User user = (User) request.getSession().getAttribute("user");
+		User user = (User) request.getAttribute("user");
 		JobsService jobsService = new JobsService();
 		ArrayList<Job> jobs = new ArrayList<Job>();
 		try {

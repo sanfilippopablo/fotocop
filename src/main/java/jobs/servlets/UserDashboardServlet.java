@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import common.servlets.LoginRequiredServlet;
 import jobs.data.JobsService;
 
 /**
@@ -26,8 +27,7 @@ import jobs.data.JobsService;
  * 
  * - jobs: La lista de los trabajos pendientes para el usuario.
  */
-@WebServlet("/UserDashboardServlet")
-public class UserDashboardServlet extends HttpServlet {
+public class UserDashboardServlet extends LoginRequiredServlet {
 	private static final long serialVersionUID = 1L;
        
     public UserDashboardServlet() {
@@ -38,17 +38,12 @@ public class UserDashboardServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// Si no está logueado, mandarlo a la página de login.
-		if (! (Boolean) request.getSession().getAttribute("isLogged")) {
-			response.sendRedirect("/login");
-			return;
-		}
 		
 		JobsService jobsService = new JobsService();
 		
 		ArrayList<Job> jobs = new ArrayList<Job>();
 		try {
-			jobs = jobsService.getPendingJobsForUser((User) request.getSession().getAttribute("user"));
+			jobs = jobsService.getPendingJobsForUser((User) request.getAttribute("user"));
 		} catch (SQLException e) {
 			e.printStackTrace();
 			throw new ServletException();
