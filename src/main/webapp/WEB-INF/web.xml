@@ -1,6 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd" metadata-complete="false" version="3.0">
   <servlet>
+    <servlet-name>createJob</servlet-name>
+    <servlet-class>jobs.servlets.CreateJobServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>createJob</servlet-name>
+    <url-pattern>/createJob</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
     <servlet-name>login</servlet-name>
     <servlet-class>users.servlets.LoginServlet</servlet-class>
   </servlet>
