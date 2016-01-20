@@ -1,4 +1,6 @@
 package integrationtests;
+
+import common.exceptions.NotFoundException;
 import static org.junit.Assert.*;
 
 import java.util.ArrayList;
@@ -46,6 +48,13 @@ public class JobsServiceIT {
 		job = js.getJobById(1);
 		assertNotNull("Job should exist", job);
 		assertEquals("Job should be the right one", job.getId(), 1);
+	}
+	
+	@Test(expected=NotFoundException.class)
+	public void testGetJobByIdWithWrongId() throws Exception{
+		JobsService js = new JobsService();
+		Job job = js.getJobById(568);
+
 	}
 	
 	@Test

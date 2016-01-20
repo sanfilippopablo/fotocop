@@ -11,9 +11,11 @@ import com.mysql.jdbc.Statement;
 import jobs.entities.Job;
 import jobs.entities.JobLine;
 import common.DBConnection;
+import common.exceptions.NotFoundException;
 import users.data.UsersService;
 import users.entities.User;
 import users.exceptions.AuthException;
+
 
 public class JobsService {
 	/**
@@ -58,16 +60,17 @@ public class JobsService {
 	 * 
 	 * @param id
 	 * @throws SQLException 
+	 * @throws NotFoundException 
 	 * @throws AuthException 
 	 */ 
-	public Job getJobById(int id) throws SQLException, AuthException{
+	public Job getJobById(int id) throws SQLException, NotFoundException, AuthException{
 		try(Connection connection = DBConnection.getConnection()){
 			String sql = "SELECT * FROM jobs WHERE id = ?;";
 			PreparedStatement statement = connection.prepareStatement(sql);
 			statement.setInt(1, id);
 			try(ResultSet resultSet = statement.executeQuery()){
 				if (!resultSet.next()) {
-					throw new AuthException("Trabajo inexistente.");
+					throw new NotFoundException("Trabajo inexistente.");
 				}
 				else {
 					Job job = new Job();
