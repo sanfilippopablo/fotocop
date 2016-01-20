@@ -73,7 +73,7 @@ public class RegistrationServlet extends HttpServlet {
 				
 				// Loguear al user
 				request.getSession().setAttribute("isLogged", true);
-				request.getSession().setAttribute("user", user);
+				request.getSession().setAttribute("userId", user.getId());
 				
 				// Redirigirlo a /
 				response.sendRedirect("/");
