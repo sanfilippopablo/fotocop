@@ -120,6 +120,10 @@ footer.no-margin-top {
 	.title {
 		justify-content: space-between;
 	}
+    
+    .add {
+        margin: 2em;
+    }
 }
 
 /* Para pantallas grandes */

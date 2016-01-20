@@ -16,17 +16,17 @@
 			<nav class="teal darken-3">
 				<div class="container">
 					<div class="nav-wrapper">
-						<a href="#!" class="brand-logo">Fotocop</a>
+						<a href="works_user.html" class="brand-logo">Fotocop</a>
 						<a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
 						<ul class="right hide-on-med-and-down">
 							<li class="active"><a href="work_user.html">Trabajos <span class="new badge red">1</span></a></li>
 							<li><a href="#">Apuntes</a></li>
-							<li><a href="#">Cerrar Sesión</a></li>
+							<li><a href="login.html">Cerrar Sesión</a></li>
 						</ul>
 						<ul class="side-nav" id="mobile-demo">
 							<li class="active"><a href="works_user.html">Trabajos <span class="new badge red">1</span></a></li>
 							<li><a href="#">Apuntes</a></li>
-							<li><a href="#">Cerrar Sesión</a></li>
+							<li><a href="login.html">Cerrar Sesión</a></li>
 							<li><a href="work_user.html">Volver</a></li>
 						</ul>
 					</div>
@@ -40,14 +40,110 @@
 					<div class="container">
 						<div class="col s12">
 							<a href="works_user.html" class="breadcrumb">Trabajos</a>
-							<a href="#!" class="breadcrumb">Apunte de Matemática Superior</a>	
+							<a href="#!" class="breadcrumb">Matemática Superior</a>	
 						</div>
 					</div>
 				</div>
 			</nav>
-			<div class="container">
-
-
+            <div class="container">
+                <hgroup>
+					<div class="flex flex-text-buttom">
+                        <h4 class="title-work">Trabajo <strong>123212</strong></h4>
+                        <p class="state-work">Estado <strong>Abierto</strong></p>
+                        <a class="waves-effect waves-light modal-trigger red btn-large add" href="#modal1"><i class="material-icons left">add</i> Agregar</a>
+					</div>
+				</hgroup>
+                <hr />
+				<div class="">
+				    <div class="card flex">
+                        <h5 class="name-file">Matemática Superior.pdf</h5>
+                        <div>
+                            <p>Cantidad: <strong>2</strong></p>
+                            <p>Faz: <strong>simple</strong></p>
+                        </div>
+				        <a class="waves-effect waves-light btn modal-trigger button-file" href="#modal1"><i class="material-icons">edit</i></a>
+                    </div>
+				</div>
+                <div class="col s12 m6 l4 ">
+				    <div class="card flex">
+                        <h5 class="name-file">Ejercicios de AM2.txt</h5>
+                        <div>
+                            <p>Cantidad: <strong>1</strong></p>
+                            <p>Faz: <strong>doble</strong></p>
+                        </div>
+				        <a class="waves-effect waves-light btn modal-trigger button-file" href="#modal1"><i class="material-icons">edit</i></a>
+                    </div>
+				</div>
+                <div class="col s12 m6 l4 ">
+				    <div class="card flex">
+                        <h5 class="name-file">TP de ISW.pdf</h5>
+                        <div>
+                            <p>Cantidad: <strong>1</strong></p>
+                            <p>Faz: <strong>doble</strong></p>
+                        </div>
+				        <a class="waves-effect waves-light btn modal-trigger button-file" href="#modal1"><i class="material-icons">edit</i></a>
+                    </div>
+				</div>
+                <div class="col s12 m6 l4 ">
+				    <div class="card flex">
+                        <h5 class="name-file">Gestión Ingenieril.jpg</h5>
+                        <div>
+                            <p>Cantidad: <strong>20</strong></p>
+                            <p>Faz: <strong>simple</strong></p>
+                        </div>
+				        <a class="waves-effect waves-light btn modal-trigger button-file" href="#modal1"><i class="material-icons">edit</i></a>
+                    </div>
+				</div>
+                <div class="flex flex-button">
+                    <a class="waves-effect waves-light blue btn-large send">Enviar</a>
+                    <a class="waves-effect waves-light red btn-large cancelar">Cancelar</a>
+                </div>
+                
+                <!-- Modal Structure -->
+                <div id="modal1" class="modal">
+                    <div class="modal-content">
+                        <h4>Añadir archivo</h4>
+                        <tr />
+                        <br />
+                        <form action="#">
+                            <div class="file-field input-field">
+                                <div class="btn">
+                                    <span>Archivo</span>
+                                    <input type="file">
+                                </div>
+                                <div class="file-path-wrapper">
+                                    <input class="file-path validate" type="text">
+                                </div>
+                            </div>
+                            <div class="flex">
+                                <div class="input-field">
+                                    <p>
+                                      <input type="checkbox" id="doble-faz" />
+                                      <label for="doble-faz">Doble faz</label>
+                                    </p>
+                                    <p>
+                                      <input type="checkbox" id="anillado" />
+                                      <label for="anillado">Anillado</label>
+                                    </p>
+                                    <p>
+                                      <input type="checkbox" id="abrochado" />
+                                      <label for="abrochado">Abrochado</label>
+                                    </p>
+                                </div>
+                                <br />
+                                <div class="input-field">
+                                    <input id="copias" type="number" class="validate">
+                                    <label for="copias">Cantidad de copias</label>
+                                </div>
+                            </div>
+                        </form>
+                    </div>  
+                    <div class="modal-footer">
+                        <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat ">Cancelar</a>
+                        <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat ">Agregar</a>
+                    </div>
+                </div>
+            </div>
 		</main>
 
 		<footer class="page-footer teal no-margin-top">
