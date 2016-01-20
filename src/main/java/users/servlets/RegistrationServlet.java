@@ -82,11 +82,9 @@ public class RegistrationServlet extends HttpServlet {
 				validationManager.addCustomError("username", "Ya existe un usuario con ese username.");
 				
 			} catch (SQLException e) {
-				response.setStatus(500);
-				request.getRequestDispatcher("/500.html").forward(request, response);
-				return;
+				e.printStackTrace();
+				throw new ServletException();
 			}
-			
 		}
 		
 		request.setAttribute("validationManager", validationManager);

@@ -81,9 +81,7 @@ public class LoginServlet extends HttpServlet {
 			}
 			catch (SQLException e) {
 				e.printStackTrace();
-				response.setStatus(500);
-				request.getRequestDispatcher("/500.html").forward(request, response);
-				return;
+				throw new ServletException();
 			}
 			
 			// Actual login

@@ -2,10 +2,10 @@ package common.exceptions;
 
 import javax.servlet.ServletException;
 
-public class NotFoundException extends ServletException {
+public class ForbiddenException extends ServletException {
 	private static final long serialVersionUID = 1L;
 
-	public NotFoundException(String message) {
+	public ForbiddenException(String message) {
 		super(message);
 	}
 }

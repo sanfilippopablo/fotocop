@@ -8,7 +8,7 @@
     <servlet-name>createJob</servlet-name>
     <url-pattern>/createJob</url-pattern>
   </servlet-mapping>
-  
+
   <servlet>
     <servlet-name>userDashboard</servlet-name>
     <servlet-class>jobs.servlets.UserDashboardServlet</servlet-class>
@@ -17,7 +17,7 @@
     <servlet-name>userDashboard</servlet-name>
     <url-pattern>/dashboard</url-pattern>
   </servlet-mapping>
-  
+
   <servlet>
     <servlet-name>login</servlet-name>
     <servlet-class>users.servlets.LoginServlet</servlet-class>
@@ -42,4 +42,29 @@
     <servlet-name>registration</servlet-name>
     <url-pattern>/registration</url-pattern>
   </servlet-mapping>
+
+  <!-- Error pages -->
+  <error-page>
+    <error-code>400</error-code>
+    <exception-type>common.exceptions.BadRequestException</exception-type>
+    <location>/400.jsp</location>
+  </error-page>
+
+  <error-page>
+    <error-code>403</error-code>
+    <exception-type>common.exceptions.ForbiddenException</exception-type>
+    <location>/403.jsp</location>
+  </error-page>
+
+  <error-page>
+    <error-code>404</error-code>
+    <exception-type>commons.exceptions.NotFoundException</exception-type>
+    <location>/404.jsp</location>
+  </error-page>
+
+  <error-page>
+    <error-code>500</error-code>
+    <exception-type>javax.servlet.ServletException</exception-type>
+    <location>/500.jsp</location>
+  </error-page>
 </web-app>

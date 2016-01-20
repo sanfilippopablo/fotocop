@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import common.exceptions.BadRequestException;
 import common.servlets.LoginRequiredServlet;
 import jobs.data.JobsService;
 import jobs.entities.Job;
@@ -38,8 +39,7 @@ public class CreateJobServlet extends LoginRequiredServlet {
 	 * Por GET tira error. No se permite por GET.
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		response.setStatus(400);
-		response.getWriter().append("No vale por GET, sólo por POST.");
+		throw new BadRequestException("Sólo por POST.");
 	}
 
 	/**

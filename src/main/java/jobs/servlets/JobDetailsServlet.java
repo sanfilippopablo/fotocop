@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import common.exceptions.ForbiddenException;
 import common.exceptions.NotFoundException;
 import common.servlets.LoginRequiredServlet;
 import jobs.data.JobsService;
@@ -44,13 +45,10 @@ public class JobDetailsServlet extends LoginRequiredServlet {
 			job = jobsService.getJobById(jobId);
 		} catch (SQLException e) {
 			throw new ServletException();
-		} catch (NotFoundException e) {
-			// TODO Debería ir a un 404
-			e.printStackTrace();
 		}
 		
 		if (!(job.getUser().getId() == ((User) request.getAttribute("user")).getId())) {
-			// TODO Debería tirar un 403 y mostrar la página de sin permiso
+			throw new ForbiddenException("No tenés permiso para ver este trabajo.");
 		}
 		
 		request.setAttribute("job", job);
