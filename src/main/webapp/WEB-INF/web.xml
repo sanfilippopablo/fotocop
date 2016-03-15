@@ -8,6 +8,15 @@
     <servlet-name>createJob</servlet-name>
     <url-pattern>/createJob</url-pattern>
   </servlet-mapping>
+  
+  <servlet>
+    <servlet-name>printJob</servlet-name>
+    <servlet-class>jobs.servlets.PrintServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>printJob</servlet-name>
+    <url-pattern>/print</url-pattern>
+  </servlet-mapping>
 
   <servlet>
     <servlet-name>userDashboard</servlet-name>
