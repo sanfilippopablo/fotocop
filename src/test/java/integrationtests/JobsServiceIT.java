@@ -97,4 +97,12 @@ public class JobsServiceIT {
 		js.submitjob(j);
 		assertEquals("Job should have a 'Sent' status", j.getStatus(),"Enviado");
 	}
+	public void testUpdateJob() throws Exception{
+		JobsService js = new JobsService();
+		Job j = js.getJobById(1);
+		j.setStatus("Being tested");;
+		js.updateJob(j);
+		j = js.getJobById(1);
+		assertEquals("Job should have 'Being tested' status", j.getStatus(),"Being tested");	
+	}
 }
