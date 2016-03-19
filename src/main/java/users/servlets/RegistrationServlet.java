@@ -50,7 +50,7 @@ public class RegistrationServlet extends HttpServlet {
 			validationManager.addError("password2", "isEmpty");
 		}
 		
-		if (password != password2) {
+		if (!password.equals(password2)) {
 			validationManager.addCustomError("password2", "Las contraseñas no coinciden.");
 		}
 		
