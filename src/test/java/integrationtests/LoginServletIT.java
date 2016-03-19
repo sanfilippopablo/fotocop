@@ -25,22 +25,27 @@ public class LoginServletIT {
   @Test
   public void testLoginServletIT() throws Exception {
     driver.get(baseUrl + "/login");
-    driver.findElement(By.name("submitLogin")).click();
-    assertEquals("Este campo no puede estar vacío.", driver.findElement(By.cssSelector("p.errorField")).getText());
-    assertEquals("Este campo no puede estar vacío.", driver.findElement(By.xpath("//p[2]")).getText());
-    driver.findElement(By.name("username")).clear();
-    driver.findElement(By.name("username")).sendKeys("asd");
-    driver.findElement(By.name("submitLogin")).click();
-    assertEquals("Este campo no puede estar vacío.", driver.findElement(By.xpath("//p[2]")).getText());
-    driver.findElement(By.name("password")).clear();
-    driver.findElement(By.name("password")).sendKeys("asd");
-    driver.findElement(By.name("submitLogin")).click();
-    assertEquals("Usuario inexistente.", driver.findElement(By.cssSelector("p.errorField")).getText());
-    driver.findElement(By.name("username")).clear();
-    driver.findElement(By.name("username")).sendKeys("pablo");
-    driver.findElement(By.name("password")).clear();
-    driver.findElement(By.name("password")).sendKeys("123");
-    driver.findElement(By.name("submitLogin")).click();
+    driver.findElement(By.name("action")).click();
+    assertEquals("Este campo no puede estar vacío.", driver.findElement(By.cssSelector("div.error.error-username")).getText());
+    assertEquals("Este campo no puede estar vacío.", driver.findElement(By.cssSelector("div.error.error-password")).getText());
+    driver.findElement(By.id("username")).clear();
+    driver.findElement(By.id("username")).sendKeys("warf");
+    driver.findElement(By.name("action")).click();
+    assertEquals("Este campo no puede estar vacío.", driver.findElement(By.cssSelector("div.error.error-password")).getText());
+    driver.findElement(By.xpath("//form[@id='login']/div[2]/div/label")).click();
+    driver.findElement(By.id("password")).clear();
+    driver.findElement(By.id("password")).sendKeys("sdgf");
+    driver.findElement(By.name("action")).click();
+    assertEquals("Usuario inexistente.", driver.findElement(By.xpath("//form[@id='login']/div[3]/div")).getText());
+    driver.findElement(By.id("username")).clear();
+    driver.findElement(By.id("username")).sendKeys("pablo");
+    driver.findElement(By.id("password")).clear();
+    driver.findElement(By.id("password")).sendKeys("sdfg");
+    driver.findElement(By.name("action")).click();
+    assertEquals("Contraseña incorrecta.", driver.findElement(By.xpath("//form[@id='login']/div[3]/div")).getText());
+    driver.findElement(By.id("password")).clear();
+    driver.findElement(By.id("password")).sendKeys("123");
+    driver.findElement(By.name("action")).click();
     assertEquals("Welcome to OpenShift", driver.getTitle());
   }
 
