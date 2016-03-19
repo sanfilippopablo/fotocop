@@ -1,0 +1,21 @@
+h1, h2, h3, h4, h5, h6 {
+	margin: 20px;
+	padding: 0px;
+}
+
+li.active{
+	background-color: #004d40;
+}
+
+#login {
+	padding: 30px;
+}
+
+footer.no-margin-top {
+	margin-top: 0px;
+}
+@media only screen and (min-width: 992px){
+	form{
+		margin-bottom: 100px;
+	}
+}

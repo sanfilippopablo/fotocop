@@ -1,73 +1,79 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-
+<%@ page contentType="text/html; charset=UTF-8" %>
 <!DOCTYPE html>
 <html>
 	<head>
 		<meta charset="utf-8">
 		<title>Fotocop</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<!-- 
-	 	<link rel="stylesheet" href="https://storage.googleapis.com/code.getmdl.io/1.0.6/material.indigo-pink.min.css">
-	 	<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-	 	<link rel="stylesheet" href="/estilos/login.css">
-	 	 -->
+		<!--Import Google Icon Font-->
+      	<link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+	 	 <!-- Compiled and minified CSS -->
+  		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/css/materialize.min.css">
+		<link rel="stylesheet" href="styles/login.css">
+		<link rel="stylesheet" href="styles/full-height-main.css">
 	</head>
 	<body>
-		<!-- Always shows a header, even in smaller screens. -->
-		<div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
-			
-			<!-- Menu -->
-			<c:import url="templates/menu.html" charEncoding="UTF-8"/>
 
-			<main class="mdl-layout__content">
-			    <div class="page-content">
-			    <!-- Your content goes here -->
-					
+		<c:import url="partials/header.html" charEncoding="UTF-8"/>
+
+		<main class="grey lighten-3">
+			<div class="container">
+				<div class="row">
 					<hgroup>
-						<h2>Ingreso</h2>
-
-						<!-- Error general -->
-						<c:if test="${(! validationManager.isValid()) && (validationManager.errorForField('username') == '') && (validationManager.errorForField('password') == '') }">
-							<c:forEach items="${validationManager.getErrors()}" var="errorGeneral">
-								<p class="errorField">
-									<c:out value="${errorGeneral.value}"/>
-								</p>
-							</c:forEach>
-						</c:if>
+						<h3 class="center-align">Ingresar</h3>
+						<h5 class="center-align teal-text">Usuario existente</h5>
 					</hgroup>
+				</div>
+				<div class="row">
+					<form action="/login" method="post" class="col s12 m6 l6 offset-m3 offset-l3 white" id="login">
 
+						<input type="hidden" name="next" value="${next}" />
 
-			    	<!-- Formulario de Login -->
-			        <form action="/login" method="post">
-			        
-			        	<input type="hidden" name="next" value="${next}" />
-			        
-							<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label group">
-						    	<input class="mdl-textfield__input" type="text" name="username" value="<c:out value='${param.username}' />" />
-						    	<label class="mdl-textfield__label" for="username">Usuario</label>
-						  	</div>
-						  	<p class="errorField">
-						  		<c:out value="${validationManager.errorForField('username')}"/>
-						  	</p>
+						<div class="row">
+							<div class="input-field col s12">
+								<input id="username" name="username" type="text" value="<c:out value='${param.username}' />" class="validate">
+								<label for="username">Usuario</label>
+								<div class="error error-username">
+										<c:out value="${validationManager.errorForField('username')}"/>
+								</div>
+							</div>
+						</div>
 
-							<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label group">
-						    	<input class="mdl-textfield__input" type="password" name="password" value="<c:out value='${param.password}' />" />
-						    	<label class="mdl-textfield__label" for="password">Contraseña</label>
-						  	</div>  	
-							<p class="errorField">
-								<c:out value="${validationManager.errorForField('password')}"/>
-							</p>
+						<div class="row">
+							<div class="input-field col s12">
+								<input id="password" name="password" type="password" value="<c:out value='${param.password}' />" class="validate">
+								<label for="password">Contraseña</label>
+								<div class="error error-password">
+									<c:out value="${validationManager.errorForField('password')}"/>
+								</div>
+							</div>
+						</div>
 
-							<button type="submit" name="submitLogin" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored button">Ingresar</button>
+						<div class="row">
+							<div class="col s12 center-align">
+								<c:out value="${validationManager.errorForField('misc')}"/>
+							</div>
+						</div>
 
+						<div class="row">
+							<button class="waves-effect waves-teal btn btn-large col s12" type="submit" name="action">
+								Iniciar Sesión
+							</button>
+						</div>
 					</form>
 				</div>
-			</main>
-		</div>
+			</div>
+		</main>
 
 		<!-- Scripts -->
 
-	<!-- 		<script src="https://storage.googleapis.com/code.getmdl.io/1.0.6/material.min.js"></script> -->
-	
+		<!--Import jQuery before materialize.js-->
+      	<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+		<!-- Compiled and minified JavaScript -->
+  		<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/js/materialize.min.js"></script>
+
+  		<script src="scripts/login.js" type="text/javascript"></script>
+
 	</body>
 </html>
