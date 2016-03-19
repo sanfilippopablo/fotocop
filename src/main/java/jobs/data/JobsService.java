@@ -172,7 +172,6 @@ public class JobsService {
 	/**
 	 * Calcula y devuelve el tiempo que se tarda en imprimir los trabajos enviados.
 	 * 
-	 * @param j
 	 * @throws SQLException 
 	 */ 
 	public long getSentJobsTime() throws SQLException{
@@ -189,5 +188,29 @@ public class JobsService {
 
 		}
 
+	}
+	/**
+	 * Ubica un job en la DB y lo actualiza.
+	 * 
+	 * @param j
+	 * @throws SQLException 
+	 */ 
+	public void updateJob(Job j) throws SQLException{
+		//Actualizamos en la DB
+		try(Connection connection = DBConnection.getConnection()){
+			String sql = "UPDATE jobs SET status = ?, eta = ?, lastModifiedDate = ?, user = ?, creationDate = ?  WHERE id = ? ";
+			PreparedStatement ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+			ps.setString(1, j.getStatus());
+			ps.setTimestamp(2, new java.sql.Timestamp(j.getEta().getTime()));
+			ps.setTimestamp(3, new java.sql.Timestamp(j.getLastModifiedDate().getTime()));
+			ps.setInt(4, j.getUser().getId());
+			ps.setTimestamp(5, new java.sql.Timestamp(j.getCreationDate().getTime()));
+			ps.setInt(6, j.getId());
+			try{
+				ps.executeUpdate();
+			}finally{
+				
+			}
+		}
 	}
 }
