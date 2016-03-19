@@ -123,7 +123,7 @@ public class ValidationManager {
 	 * @param value Valor a probar
 	 */
 	public boolean validateNotEmpty(String field, String value) {
-		if (value.isEmpty()) {
+		if (value == null || value.isEmpty()) {
 			this.addError(field, "isEmpty");
 			return false;
 		}
