@@ -38,6 +38,9 @@ Vagrant.configure(2) do |config|
     sudo sed -i "s/.*bind-address.*/bind-address = 0.0.0.0/" /etc/mysql/my.cnf
     sudo service mysql restart
 
+    # Create Database
+    mysql -u$OPENSHIFT_MYSQL_DB_USERNAME -p$OPENSHIFT_MYSQL_DB_PASSWORD -e 'CREATE DATABASE fotocop;' 
+
     # Allow root to access from outside the host.
     mysql -u$OPENSHIFT_MYSQL_DB_USERNAME -p$OPENSHIFT_MYSQL_DB_PASSWORD < scripts/setup_user.sql
 
