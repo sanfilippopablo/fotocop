@@ -105,4 +105,12 @@ public class JobsServiceIT {
 		j = js.getJobById(1);
 		assertEquals("Job should have 'Being tested' status", j.getStatus(),"Being tested");	
 	}
+	@Test
+	public void testGetPendingJobs() throws Exception{
+		ArrayList<Job> pendingJobs = null;
+		JobsService js = new JobsService();
+		//Obtenemos los trabajos pendientes
+		pendingJobs = js.getPendingJobs();
+		assertNotNull("Pending jobs array should have been created", pendingJobs);
+	}
 }
