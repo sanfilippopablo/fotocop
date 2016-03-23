@@ -213,4 +213,33 @@ public class JobsService {
 			}
 		}
 	}
+	/**
+	 * Ubica los trabajos pendientes de impresión y los devuelve en un ArrayList.
+	 * 
+	 * 
+	 * @throws SQLException 
+	 * @throws AuthException 
+	 */ 
+	public ArrayList<Job> getPendingJobs() throws SQLException, AuthException{
+		ArrayList<Job> pendingJobs = new ArrayList<Job>();
+		UsersService us = new UsersService();
+		try(Connection connection = DBConnection.getConnection()){
+			String sql = "SELECT * FROM jobs WHERE status = 'Enviado';";
+			PreparedStatement statement = connection.prepareStatement(sql);
+			try(ResultSet resultSet = statement.executeQuery()){
+				//Por cada uno, creamos un Job acá, lo cargamos con la data, y lo agregamos al array de resultados
+				while (resultSet.next()) {
+					Job auxJob = new Job();
+					auxJob.setId(resultSet.getInt("id"));
+					auxJob.setStatus(resultSet.getString("status"));
+					auxJob.setUser(us.getUserById(resultSet.getInt("user")));
+					auxJob.setCreationDate(resultSet.getTimestamp("creationDate"));
+					auxJob.setEta(resultSet.getTimestamp("eta"));
+					auxJob.setLastModifiedDate(resultSet.getTimestamp("lastModifiedDate"));
+					pendingJobs.add(auxJob);
+				}
+				return pendingJobs;
+			}
+		}
+	}
 }
