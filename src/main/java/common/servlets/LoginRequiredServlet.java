@@ -15,13 +15,8 @@ import users.entities.User;
 import users.exceptions.AuthException;
 
 /**
- * Servlet abstracto. Se fija si el usuario está logueado. Si no lo está,
- * redirecciona a la página de login, enviándole la URI de este servlet
- * en el parámetro next.
+ * Servlet abstracto. Provee métodos de utilidad para los servlets que lo hereden.
  * 
- * Todos los servlets que hereden de este, se aseguran que el usuario está
- * logueado sin mayor chequeo. Además reciben el User como attribute del 
- * request, en vez de obtenerlo de la sesión.
  */
 public abstract class LoginRequiredServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -31,22 +26,22 @@ public abstract class LoginRequiredServlet extends HttpServlet {
     }
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 * Chequea si un usuario está logueado. Además, modifica el request recibido,
+	 * agregándole un attribute user con el user, si está logueado.
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected boolean isLoggedIn(HttpServletRequest request) throws ServletException, IOException {
 
 		HttpSession session = request.getSession();
+
+		Integer userId = null;
+		userId = (Integer) request.getSession().getAttribute("userId");
 		
-		// Si no está logueado, mandarlo a la página de login.
-		if ( ! (Boolean) session.getAttribute("isLogged") ) {
-			session.setAttribute("isLogged", false);	
-			response.sendRedirect("/login?next=" + request.getRequestURI());
+		if (userId == null) {
+			return false;
 		}
 		
-		// Si está logueado, setear el user
 		else {
 			UsersService usersService = new UsersService();
-			Integer userId = (Integer) session.getAttribute("userId");
 			
 			User user = null;
 			try {
@@ -56,16 +51,9 @@ public abstract class LoginRequiredServlet extends HttpServlet {
 				throw new ServletException();
 			}
 			request.setAttribute("user", user);
+			return true;
 		}
-		
-		super.doGet(request, response);
-	}
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		doGet(request, response);
 	}
 
 }

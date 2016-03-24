@@ -29,7 +29,7 @@ import jobs.data.JobsService;
  * 
  * - jobs: La lista de los trabajos pendientes para el usuario.
  */
-public class UserDashboardServlet extends HttpServlet {
+public class UserDashboardServlet extends LoginRequiredServlet {
 	private static final long serialVersionUID = 1L;
        
     public UserDashboardServlet() {
@@ -41,23 +41,8 @@ public class UserDashboardServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		// Login required
-		Integer userId = null;
-		userId = (Integer) request.getSession().getAttribute("userId");
-		
-		if (userId != null) {
-			// Logged in. Go on.
-			UsersService usersService = new UsersService();
-			User user = null;
-			try {
-				user = usersService.getUserById(userId);
-			} catch (AuthException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			} catch (SQLException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
+		if (isLoggedIn(request)) {
+			User user = (User) request.getAttribute("user");
 			
 			JobsService jobsService = new JobsService();
 			
