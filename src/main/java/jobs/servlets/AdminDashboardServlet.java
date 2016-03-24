@@ -58,7 +58,7 @@ public class AdminDashboardServlet extends BaseServlet{
 		}
 		else {
 			// Not logged in. You shall not pass.
-			response.sendRedirect("/login?next=" + request.getRequestURI());
+			redirectToLogin(request, response);
 		}
 	}
 

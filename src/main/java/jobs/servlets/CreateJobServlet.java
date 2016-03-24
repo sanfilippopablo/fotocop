@@ -46,34 +46,39 @@ public class CreateJobServlet extends BaseServlet {
 	 * Por POST ejecuta el behavior descrito arriba.
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		User user = (User) request.getAttribute("user");
-		JobsService jobsService = new JobsService();
-		ArrayList<Job> jobs = new ArrayList<Job>();
-		try {
-			jobs = jobsService.getPendingJobsForUser(user);
-		} catch (SQLException e) {
-			e.printStackTrace();
-			throw new ServletException();
-		}
-		
-		// Si ya existe un Job abierto para ese user, mostrarle ese
-		for (Job job: jobs) {
-			if (job.getStatus() == "Abierto") {
-				response.sendRedirect("/job?id=" + Integer.toString(job.getId()));
-				return;
+		if (isLoggedIn(request)) {
+			User user = (User) request.getAttribute("user");
+			JobsService jobsService = new JobsService();
+			ArrayList<Job> jobs = new ArrayList<Job>();
+			try {
+				jobs = jobsService.getPendingJobsForUser(user);
+			} catch (SQLException e) {
+				e.printStackTrace();
+				throw new ServletException();
 			}
+			
+			// Si ya existe un Job abierto para ese user, mostrarle ese
+			for (Job job: jobs) {
+				if (job.getStatus() == "Abierto") {
+					response.sendRedirect("/job?id=" + Integer.toString(job.getId()));
+					return;
+				}
+			}
+			
+			// Si no tiene ningún Job abierto, crearle uno y mostrárselo
+			Job job;
+			try {
+				job = jobsService.createJobForUser(user);
+			} catch (SQLException e) {
+				e.printStackTrace();
+				throw new ServletException();
+			}
+			response.sendRedirect("/job?id=" + Integer.toString(job.getId()));
 		}
 		
-		// Si no tiene ningún Job abierto, crearle uno y mostrárselo
-		Job job;
-		try {
-			job = jobsService.createJobForUser(user);
-		} catch (SQLException e) {
-			e.printStackTrace();
-			throw new ServletException();
+		else {
+			redirectToLogin(request, response);
 		}
-		response.sendRedirect("/job?id=" + Integer.toString(job.getId()));
 	}
 
 }

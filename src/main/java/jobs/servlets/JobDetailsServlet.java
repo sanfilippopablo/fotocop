@@ -36,23 +36,28 @@ public class JobDetailsServlet extends BaseServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		JobsService jobsService = new JobsService();
-		
-		Integer jobId = Integer.parseInt(request.getParameter("id"));
-		
-		Job job = null;
-		try {
-			job = jobsService.getJobById(jobId);
-		} catch (SQLException e) {
-			throw new ServletException();
+		if (isLoggedIn(request)) {
+			JobsService jobsService = new JobsService();
+			
+			Integer jobId = Integer.parseInt(request.getParameter("id"));
+			
+			Job job = null;
+			try {
+				job = jobsService.getJobById(jobId);
+			} catch (SQLException e) {
+				throw new ServletException();
+			}
+			
+			if (!(job.getUser().getId() == ((User) request.getAttribute("user")).getId())) {
+				throw new ForbiddenException("No tenés permiso para ver este trabajo.");
+			}
+			
+			request.setAttribute("job", job);
+			request.getRequestDispatcher("/jobDetails.jsp").forward(request, response);
 		}
-		
-		if (!(job.getUser().getId() == ((User) request.getAttribute("user")).getId())) {
-			throw new ForbiddenException("No tenés permiso para ver este trabajo.");
+		else {
+			redirectToLogin(request, response);
 		}
-		
-		request.setAttribute("job", job);
-		request.getRequestDispatcher("/jobDetails.jsp").forward(request, response);
 	}
 
 	/**

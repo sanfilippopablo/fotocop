@@ -43,26 +43,33 @@ public class SendJobServlet extends BaseServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		User user = (User) request.getAttribute("user");
-		Integer jobId = Integer.parseInt(request.getParameter("id"));
-		JobsService jobsService = new JobsService();
+		if (isLoggedIn(request)) {
+			
+			User user = (User) request.getAttribute("user");
+			Integer jobId = Integer.parseInt(request.getParameter("id"));
+			JobsService jobsService = new JobsService();
+			
+			Job job = null;
+	        try {
+	            job = jobsService.getJobById(jobId);
+	        } catch (SQLException e) {
+	            throw new ServletException();
+	        }
+	        //Primero, se valida si el job es de ese usuario
+	        if (job.getUser().getId() == user.getId()){
+	        	//Luego, entonces, se submittea
+	        	try {
+	    			jobsService.submitjob(job);
+	    		} catch (SQLException e) {
+	    			e.printStackTrace();
+	    			throw new ServletException();
+	    		}
+	    		response.sendRedirect("/");
+	        }
+	   }
 		
-		Job job = null;
-        try {
-            job = jobsService.getJobById(jobId);
-        } catch (SQLException e) {
-            throw new ServletException();
-        }
-        //Primero, se valida si el job es de ese usuario
-        if (job.getUser().getId() == user.getId()){
-        	//Luego, entonces, se submittea
-        	try {
-    			jobsService.submitjob(job);
-    		} catch (SQLException e) {
-    			e.printStackTrace();
-    			throw new ServletException();
-    		}
-    		response.sendRedirect("/");
-        }
+		else {
+			redirectToLogin(request, response);
+		}
 	}
 }

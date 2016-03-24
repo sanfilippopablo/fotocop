@@ -46,21 +46,29 @@ public class PrintServlet extends BaseServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		Integer jobId = Integer.parseInt(request.getParameter("id"));
-		User user = (User) request.getAttribute("user");
+		if (isLoggedIn(request)) {
 		
-		JobsService jobsService = new JobsService();
-		PrintService printService = new PrintService();
-		
-		Job job = null;
-		try {
-			job = jobsService.getJobById(jobId);
-		} catch (SQLException e) {
-			throw new ServletException();
+			Integer jobId = Integer.parseInt(request.getParameter("id"));
+			User user = (User) request.getAttribute("user");
+			
+			JobsService jobsService = new JobsService();
+			PrintService printService = new PrintService();
+			
+			Job job = null;
+			try {
+				job = jobsService.getJobById(jobId);
+			} catch (SQLException e) {
+				throw new ServletException();
+			}
+			
+			printService.printJob(job);
+			job.setStatus("Printed");
+			
 		}
 		
-		printService.printJob(job);
-		job.setStatus("Printed");
+		else {
+			redirectToLogin(request, response);
+		}
 	}
 
 }
