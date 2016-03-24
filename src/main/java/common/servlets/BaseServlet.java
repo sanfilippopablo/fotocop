@@ -55,5 +55,9 @@ public abstract class BaseServlet extends HttpServlet {
 		}
 
 	}
+	
+	protected void redirectToLogin(HttpServletRequest request, HttpServletResponse response) throws IOException {
+		response.sendRedirect("/login?next=" + request.getRequestURI());
+	}
 
 }
