@@ -68,6 +68,8 @@ public class UsersService {
 					user.setUsername(username);
 					user.setEmail(resultSet.getString("email"));
 					user.setHashedPassword(resultSet.getString("password"));
+					Integer adminInt = resultSet.getInt("is_admin");
+					user.setAdmin(adminInt.equals(1));
 					return user;
 				}
 			}
@@ -102,6 +104,8 @@ public class UsersService {
 					user.setUsername(resultSet.getString("username"));
 					user.setEmail(resultSet.getString("email"));
 					user.setHashedPassword(resultSet.getString("password"));
+					Integer adminInt = resultSet.getInt("is_admin");
+					user.setAdmin(adminInt.equals(1));
 					return user;
 				}
 			}
