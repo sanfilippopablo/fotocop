@@ -9,7 +9,8 @@
 
   	<link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/css/materialize.min.css">
-  	<link rel="stylesheet" href="styles/jobs.css">
+      <link rel="stylesheet" href="/styles/full-height-main.css">
+  	<link rel="stylesheet" href="/styles/jobs.css">
   </head>
 
   <body>
@@ -96,6 +97,7 @@
           </c:forEach>
 
         </div>
+      </div>
   	</main>
 
   	<!-- Scripts -->

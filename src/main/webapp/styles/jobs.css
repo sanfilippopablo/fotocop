@@ -1,101 +1,134 @@
+h1, h2, h3, h4, h5, h6 {
+	margin-button: 10px;
+	padding: 0px;
+}
+
+hgroup {
+	margin: 0;
+}
+
+.title {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	align-items: center;
+	align-content: center;
+	flex-flow: row wrap;
+}
+
+.item {
+
+}
+
+.item-primary {
+	display: flex;
+	flex-direction: column;
+	flex-wrap: wrap;
+	align-items: center;
+	margin: 0;
+
+}
+
+.item-primary h4 {
+	text-align: center;
+	margin: 1em;
+}
+
+.item-primary p {
+	margin-top: .1em;
+	text-align: center;
+}
+
+.item-second {
+	margin-right: 4em;
+	margin-left: 4em;
+}
+
+
+.row {
+	margin: 0;
+}
+
+.block {
+	display: block;
+}
+
 .flex {
 	display: flex;
 	flex-direction: column;
 	align-items: center;
 }
 
-.title-work {
-    margin: .1em;
-    margin-top: .3em;
-    padding: 0;
+.center {
+	text-align: center;
 }
 
-.state-work {
-    font-size: 1.5em;
-    margin: .1em;
+h4.card-title {
+	font-family: sans-serif;
 }
 
-.name-file {
-    margin: 2em;
-    text-align: center;
+p.flow-text {
+	font-size: 1.2em;
 }
 
-.button-file {
-    margin: 2em;
+li.active{
+	background-color: #004d40;
 }
 
-.cancelar {
-    width: 300px;
-    margin: .75rem;
+
+.card {
+	margin: 1.5rem 0 1.5rem 0;
 }
 
-.send {
-    width: 300px;
-    margin: .75rem;
+.icon-card {
+	padding: .4em;
 }
 
-.input-field p {
-    display: block;
-    width: 100px;
+.card-action {
+	background-color: green;
 }
 
+.card-action:hover {
+	background-color: green;
+    opacity: 0.4;
+    filter: alpha(opacity=40); /* For IE8 and earlier */
+}
+
+.card-principal-contenido {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	margin-bottom: 1em;
+}
+
+img.hover {
+	opacity: 0.4;
+    filter: alpha(opacity=40); /* For IE8 and earlier */
+}
+
+img.hover:hover {
+    opacity: 1;
+    filter: alpha(opacity=100); /* For IE8 and earlier */
+}
+
+footer.no-margin-top {
+	margin-top: 0px;
+}
 
 /* Para pantallas medianas */
 @media only screen and (min-width: 600px){
-	
-    .title {
+	.title {
 		justify-content: space-between;
 	}
-    
+
     .add {
         margin: 2em;
     }
-    
-    .flex {
-		justify-content: space-between;
-		flex-direction: row;
-	}
-    
-    .flex-text-buttom {
-        align-items: flex-end;
-    }
-    
-    .flex-button {
-        justify-content: space-around;
-    }
-    
-    .title-work {
-        margin: 2rem;
-        height: 54px;
-        vertical-align:bottom;
-    }
-
-    .state-work {
-        font-size: 1.5em;
-        margin: 2rem;
-        height: 54px;
-        vertical-align: baseline;
-    }
-
-    
-    .name-file {
-        width: 300px;
-        text-align: left;
-    }
-    
-    .cancelar {
-        margin: 1.5rem;
-    }
-    
-    .send {
-        margin: 1.5rem;
-    }
-
 }
 
 /* Para pantallas grandes */
 @media only screen and (min-width: 992px){
-	
+
 	h1, h2, h3, h4, h5, h6 {
 		margin: 10px;
 	}
@@ -103,13 +136,24 @@
 	.container {
 		width: 85%;
 	}
-    
-    .cancelar {
-        margin: 3rem;
-    }
-    
-    .send {
-        margin: 3rem;
-    }
+
+	.icon-card {
+		margin-right: .5em;
+		padding: .2em;
+	}
+
+	.flex {
+		display: flex;
+		justify-content: space-between;
+		flex-direction: row;
+	}
+
+	.card-principal-contenido {
+		align-items: flex-start;
+	}
+
+	.card-principal-contenido p.center {
+		margin-left: 3.3em;
+	}
 
 }
