@@ -16,7 +16,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import common.servlets.LoginRequiredServlet;
+import common.servlets.BaseServlet;
 import jobs.data.JobsService;
 
 /**
@@ -29,7 +29,7 @@ import jobs.data.JobsService;
  * 
  * - jobs: La lista de los trabajos pendientes para el usuario.
  */
-public class UserDashboardServlet extends LoginRequiredServlet {
+public class UserDashboardServlet extends BaseServlet {
 	private static final long serialVersionUID = 1L;
        
     public UserDashboardServlet() {

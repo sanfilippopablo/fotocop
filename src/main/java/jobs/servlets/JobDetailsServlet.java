@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import common.exceptions.ForbiddenException;
 import common.exceptions.NotFoundException;
-import common.servlets.LoginRequiredServlet;
+import common.servlets.BaseServlet;
 import jobs.data.JobsService;
 import jobs.entities.Job;
 import users.entities.User;
@@ -25,7 +25,7 @@ import users.entities.User;
  * 
  * - job: El Job del que se deben mostrar los detalles.
  */
-public class JobDetailsServlet extends LoginRequiredServlet {
+public class JobDetailsServlet extends BaseServlet {
 	private static final long serialVersionUID = 1L;
 
     public JobDetailsServlet() {

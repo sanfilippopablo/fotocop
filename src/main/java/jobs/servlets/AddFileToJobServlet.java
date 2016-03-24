@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import common.exceptions.BadRequestException;
-import common.servlets.LoginRequiredServlet;
+import common.servlets.BaseServlet;
 import jobs.data.JobsService;
 import jobs.entities.Job;
 import jobs.entities.File;
@@ -35,7 +35,7 @@ import javax.servlet.http.Part;
  * 
  */
 
-public class AddFileToJobServlet extends LoginRequiredServlet {
+public class AddFileToJobServlet extends BaseServlet {
     private static final long serialVersionUID = 1L;
 	public AddFileToJobServlet() {
 		// TODO Auto-generated constructor stub

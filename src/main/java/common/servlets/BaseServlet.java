@@ -18,10 +18,10 @@ import users.exceptions.AuthException;
  * Servlet abstracto. Provee métodos de utilidad para los servlets que lo hereden.
  * 
  */
-public abstract class LoginRequiredServlet extends HttpServlet {
+public abstract class BaseServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-    public LoginRequiredServlet() {
+    public BaseServlet() {
         super();
     }
 

@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import common.exceptions.BadRequestException;
-import common.servlets.LoginRequiredServlet;
+import common.servlets.BaseServlet;
 import jobs.data.JobsService;
 import jobs.entities.Job;
 import users.entities.User;
@@ -23,7 +23,7 @@ import users.exceptions.AuthException;
  * No renderiza ningún JSP, sólo hace redirecciones.
  */
 
-public class SendJobServlet extends LoginRequiredServlet {
+public class SendJobServlet extends BaseServlet {
 
 	/**
      * @see HttpServlet#HttpServlet()

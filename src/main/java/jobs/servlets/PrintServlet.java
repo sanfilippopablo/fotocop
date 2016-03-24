@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import common.exceptions.BadRequestException;
-import common.servlets.LoginRequiredServlet;
+import common.servlets.BaseServlet;
 import jobs.data.JobsService;
 import jobs.data.PrintService;
 import jobs.entities.Job;
@@ -23,7 +23,7 @@ import users.exceptions.AuthException;
  * 
  * No renderiza ningún JSP, sólo hace redirecciones.
  */
-public class PrintServlet extends LoginRequiredServlet {
+public class PrintServlet extends BaseServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
