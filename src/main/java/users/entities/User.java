@@ -10,7 +10,7 @@ import org.mindrot.jbcrypt.BCrypt;
 public class User {
 	
 	int id;
-
+	boolean admin;
 	String username;
 	String email;
 	String hashedPassword;
@@ -33,6 +33,12 @@ public class User {
 	}
 	public void setEmail(String email) {
 		this.email = email;
+	}
+	public boolean isAdmin() {
+		return admin;
+	}
+	public void setAdmin(boolean admin) {
+		this.admin = admin;
 	}
 	
 	/**
