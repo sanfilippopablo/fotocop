@@ -86,39 +86,34 @@ public class JobsService {
 					} catch (AuthException e) {
 						e.printStackTrace();
 					}
+					ArrayList<JobLine> jobLines = new ArrayList<JobLine>();
 					try(Connection connection2 = DBConnection.getConnection()){
 						//Para cargar el arreglo de JobLines, necesitamos otra SQL sentence
 						sql = "SELECT * FROM joblines WHERE job = ?;";
 						statement = connection2.prepareStatement(sql);
 						statement.setInt(1, id);
 						try(ResultSet resultSet2 = statement.executeQuery()){
-							if (!resultSet2.next()) {
-								throw new NotFoundException("JobLine inexistente.");
-							}
-							else {
-								//Si hay joblines para ese job, se las cargamos
-								ArrayList<JobLine> jobLines = new ArrayList<JobLine>();
-								FilesService fs = new FilesService();
-								while(resultSet2.next()){
-									JobLine jl = new JobLine();
-									Integer aux = resultSet2.getInt("abrochado");
-									jl.setAbrochado(aux.equals(1));
-									aux = resultSet2.getInt("anillado");
-									jl.setAnillado(aux.equals(1));
-									aux = resultSet2.getInt("dobleFaz");
-									jl.setDobleFaz(aux.equals(1));
-									File file = fs.getFileById(resultSet2.getInt("file"));
-									jl.setFile(file);
-									jl.setQuantity(resultSet2.getInt("quantity"));
-									jl.setJob(job);
-									//Una vez cargada la JobLine, se la agregamos al arreglo de JobLines y dicho arreglo al Job
-									jobLines.add(jl);
-								}
-								job.setJobLines(jobLines);
-								return job;
+							//Si hay joblines para ese job, se las cargamos
+							FilesService fs = new FilesService();
+							while(resultSet2.next()){
+								JobLine jl = new JobLine();
+								Integer aux = resultSet2.getInt("abrochado");
+								jl.setAbrochado(aux.equals(1));
+								aux = resultSet2.getInt("anillado");
+								jl.setAnillado(aux.equals(1));
+								aux = resultSet2.getInt("dobleFaz");
+								jl.setDobleFaz(aux.equals(1));
+								File file = fs.getFileById(resultSet2.getInt("file"));
+								jl.setFile(file);
+								jl.setQuantity(resultSet2.getInt("quantity"));
+								jl.setJob(job);
+								//Una vez cargada la JobLine, se la agregamos al arreglo de JobLines y dicho arreglo al Job
+								jobLines.add(jl);
 							}
 						}
 					}
+					job.setJobLines(jobLines);
+					return job;
 				}
 			}
 		}
