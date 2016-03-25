@@ -1,4 +1,4 @@
--- MySQL dump 10.16  Distrib 10.1.10-MariaDB, for Linux (x86_64)
+-- MySQL dump 10.13  Distrib 5.7.9, for osx10.9 (x86_64)
 --
 -- Host: 192.168.33.10    Database: fotocop
 -- ------------------------------------------------------
@@ -35,7 +35,7 @@ CREATE TABLE `files` (
 
 LOCK TABLES `files` WRITE;
 /*!40000 ALTER TABLE `files` DISABLE KEYS */;
-INSERT INTO `files` VALUES (3,'testFileId3');
+INSERT INTO `files` VALUES (1,'testFile1'),(2,'testFile2'),(3,'testFileId3');
 /*!40000 ALTER TABLE `files` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -53,10 +53,13 @@ CREATE TABLE `joblines` (
   `anillado` tinyint(1) DEFAULT '0',
   `dobleFaz` tinyint(1) DEFAULT '1',
   `quantity` int(11) DEFAULT '1',
+  `job` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `fk1` (`file`),
+  KEY `fk2_idx` (`job`),
+  CONSTRAINT `fk2` FOREIGN KEY (`job`) REFERENCES `jobs` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk1` FOREIGN KEY (`file`) REFERENCES `files` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -65,7 +68,7 @@ CREATE TABLE `joblines` (
 
 LOCK TABLES `joblines` WRITE;
 /*!40000 ALTER TABLE `joblines` DISABLE KEYS */;
-INSERT INTO `joblines` VALUES (5,3,0,0,1,3);
+INSERT INTO `joblines` VALUES (5,3,0,0,1,3,1),(6,2,1,0,1,2,2),(7,1,0,0,0,4,1),(8,2,1,0,1,1,1),(9,1,0,1,1,3,3);
 /*!40000 ALTER TABLE `joblines` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -116,7 +119,7 @@ CREATE TABLE `users` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `username_UNIQUE` (`username`),
   UNIQUE KEY `email_UNIQUE` (`email`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -138,4 +141,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-01-18 19:04:49
+-- Dump completed on 2016-03-25 12:07:19
