@@ -250,19 +250,17 @@ public class JobsService {
 		ArrayList<Job> pendingJobs = new ArrayList<Job>();
 		UsersService us = new UsersService();
 		try(Connection connection = DBConnection.getConnection()){
-			String sql = "SELECT * FROM jobs WHERE status = 'Enviado';";
+			String sql = "SELECT id FROM jobs WHERE status = 'Enviado';";
 			PreparedStatement statement = connection.prepareStatement(sql);
 			try(ResultSet resultSet = statement.executeQuery()){
 				//Por cada uno, creamos un Job acá, lo cargamos con la data, y lo agregamos al array de resultados
 				while (resultSet.next()) {
-					Job auxJob = new Job();
-					auxJob.setId(resultSet.getInt("id"));
-					auxJob.setStatus(resultSet.getString("status"));
-					auxJob.setUser(us.getUserById(resultSet.getInt("user")));
-					auxJob.setCreationDate(resultSet.getTimestamp("creationDate"));
-					auxJob.setEta(resultSet.getTimestamp("eta"));
-					auxJob.setLastModifiedDate(resultSet.getTimestamp("lastModifiedDate"));
-					pendingJobs.add(auxJob);
+					try {
+						pendingJobs.add(getJobById(resultSet.getInt("id")));
+					} catch (NotFoundException e) {
+						// This won't happen but Java doesn't know that
+						e.printStackTrace();
+					}
 				}
 				return pendingJobs;
 			}
