@@ -10,6 +10,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import users.entities.User;
+import users.exceptions.AuthException;
+
 import com.mysql.jdbc.Statement;
 
 import common.DBConnection;
@@ -82,5 +85,35 @@ public class FilesService {
 	    
 	    return input;
 	
+	}
+	/**
+	 * Devuelve un objeto File tomando como parámetro
+	 * el id.
+	 *
+	 * @param id
+	 * @return File
+	 * @throws AuthException
+	 * @throws SQLException
+	 */
+	public File getFileById(int id) throws AuthException, SQLException {
+		try (Connection connection = DBConnection.getConnection()) {
+	
+			String sql = "SELECT * FROM files WHERE id = ?;";
+			PreparedStatement statement = connection.prepareStatement(sql);
+			statement.setInt(1, id);
+	
+			try (ResultSet resultSet = statement.executeQuery()) {
+	
+				if (!resultSet.next()) {
+					throw new AuthException("Archivo inexistente.");
+				}
+				else {
+					File file = new File();
+						file.setId(id);
+						file.setName(resultSet.getString("name"));
+					return file;
+				}
+			}
+		}
 	}
 }
