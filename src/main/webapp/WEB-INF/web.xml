@@ -8,7 +8,7 @@
     <servlet-name>createJob</servlet-name>
     <url-pattern>/createJob</url-pattern>
   </servlet-mapping>
-  
+
   <servlet>
     <servlet-name>printJob</servlet-name>
     <servlet-class>jobs.servlets.PrintServlet</servlet-class>
@@ -25,6 +25,15 @@
   <servlet-mapping>
     <servlet-name>userDashboard</servlet-name>
     <url-pattern>/dashboard</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
+    <servlet-name>job</servlet-name>
+    <servlet-class>jobs.servlets.JobDetailsServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>job</servlet-name>
+    <url-pattern>/job</url-pattern>
   </servlet-mapping>
 
   <servlet>

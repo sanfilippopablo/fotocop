@@ -53,7 +53,7 @@ public class JobDetailsServlet extends BaseServlet {
 			}
 			
 			request.setAttribute("job", job);
-			request.getRequestDispatcher("/jobDetails.jsp").forward(request, response);
+			request.getRequestDispatcher("/job.jsp").forward(request, response);
 		}
 		else {
 			redirectToLogin(request, response);
