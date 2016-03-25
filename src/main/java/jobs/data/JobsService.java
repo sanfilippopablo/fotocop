@@ -128,8 +128,10 @@ public class JobsService {
 	 * 
 	 * @param u
 	 * @throws SQLException 
+	 * @throws AuthException 
+	 * @throws NotFoundException 
 	 */ 
-	public ArrayList<Job> getPendingJobsForUser(User u) throws SQLException{
+	public ArrayList<Job> getPendingJobsForUser(User u) throws SQLException, NotFoundException, AuthException{
 		ArrayList<Job> pendingJobs = new ArrayList<Job>();
 		try(Connection connection = DBConnection.getConnection()){
 			String sql = "SELECT * FROM jobs WHERE user = ? AND (status <> 'Retirado');";
@@ -137,14 +139,7 @@ public class JobsService {
 			statement.setInt(1, u.getId());
 			try(ResultSet resultSet = statement.executeQuery()){
 				while (resultSet.next()) {
-					Job auxJob = new Job();
-					auxJob.setId(resultSet.getInt("id"));
-					auxJob.setStatus(resultSet.getString("status"));
-					auxJob.setUser(u);
-					auxJob.setCreationDate(resultSet.getTimestamp("creationDate"));
-					auxJob.setEta(resultSet.getTimestamp("eta"));
-					auxJob.setLastModifiedDate(resultSet.getTimestamp("lastModifiedDate"));
-					pendingJobs.add(auxJob);
+					pendingJobs.add(getJobById(resultSet.getInt("id")));
 				}
 				return pendingJobs;
 			}
