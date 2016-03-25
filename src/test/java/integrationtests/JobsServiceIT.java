@@ -19,8 +19,9 @@ import jobs.data.JobsService;
 import jobs.entities.File;
 import jobs.entities.Job;
 import jobs.entities.JobLine;
+import testutils.IntegrationBase;
 
-public class JobsServiceIT {
+public class JobsServiceIT extends IntegrationBase {
 	JobsService jobsService;
 	
 	@Before
@@ -65,6 +66,13 @@ public class JobsServiceIT {
 		User user = us.getUserById(1);
 		pendingJobs = js.getPendingJobsForUser(user);
 		assertNotNull("Pending jobs array should have been created", pendingJobs);
+		assertEquals("There should be 2 open jobs for this user", pendingJobs.size(), 2);
+		
+		Job job1 = pendingJobs.get(0);
+		for (JobLine jobline : job1.getJobLines()) {
+			System.out.println(jobline.getFile().getId());
+		}
+		assertEquals("Job1 should have 3 job lines", 3, job1.getJobLines().size());
 	}
 	@Test 
 	public void testAddJobLine() throws Exception{
@@ -76,7 +84,7 @@ public class JobsServiceIT {
 	@Test
 	public void testAddJobLineToJob() throws Exception{
 		JobsService js = new JobsService();
-		Job j = new Job();
+		Job j = js.getJobById(1);
 		JobLine jl = new JobLine();
 		File f = new File();
 		f.setId(3);
