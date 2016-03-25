@@ -13,6 +13,14 @@ public class JobLine {
 	boolean abrochado;
 	boolean dobleFaz;
 	
+	public Job getJob() {
+		return job;
+	}
+	public void setJob(Job job) {
+		this.job = job;
+	}
+	Job job;
+	
 	public int getQuantity() {
 		return quantity;
 	}
