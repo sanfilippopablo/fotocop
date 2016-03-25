@@ -161,13 +161,14 @@ public class JobsService {
 		j.addJobLine(jl);
 		//Lo agregamos a la DB
 			try(Connection connection = DBConnection.getConnection()){
-				String sql = "INSERT INTO joblines(`file`, `quantity`, `abrochado`, `anillado`, `dobleFaz`) VALUES (?, ?, ?, ?, ?);";
+				String sql = "INSERT INTO joblines(`file`, `quantity`, `abrochado`, `anillado`, `dobleFaz`, `job`) VALUES (?, ?, ?, ?, ?, ?);";
 				PreparedStatement ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 				ps.setInt(1, jl.getFile().getId());
 				ps.setInt(2, jl.getQuantity());
 				ps.setBoolean(3, jl.isAbrochado());
 				ps.setBoolean(4, jl.isAnillado());
 				ps.setBoolean(5, jl.isDobleFaz());
+				ps.setInt(6, j.getId());
 				try{
 					ps.executeUpdate();
 				}finally{}
