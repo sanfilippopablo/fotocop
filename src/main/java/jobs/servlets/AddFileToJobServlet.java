@@ -52,52 +52,60 @@ public class AddFileToJobServlet extends BaseServlet {
 	 *   
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException  {
-		//Inicializamos los Services
-		FilesService fs = new FilesService();
-		JobsService jobsService = new JobsService();
-		//Obtenemos la data por Post 
-		Integer quantity = Integer.parseInt(request.getParameter("quantity"));
-		Integer abrochado = Integer.parseInt(request.getParameter("abrochado"));
-		Integer anillado = Integer.parseInt(request.getParameter("anillado"));
-		Integer dobleFaz = Integer.parseInt(request.getParameter("dobleFaz"));
-		User user = (User) request.getAttribute("user");
-		Integer jobId = Integer.parseInt(request.getParameter("id"));
 		
-		//Identificamos el job correspondiente
-		Job job = null;
-        try {
-            job = jobsService.getJobById(jobId);
-        } catch (SQLException e) {
-            throw new ServletException();
-        }
-        
-        //Obtenemos el nombre del archivo 
-        Collection<Part> parts = request.getParts();
-        Part part = parts.iterator().next();
-        String filename;
-        filename = getFileName(part);
-        
-        InputStream stream = part.getInputStream(); //AGARRARLO
-        //Obtenemos el archivo
-        File file = new File();
-		try {
-			file = fs.createFileFromInputStream(stream, filename);
-		} catch (SQLException e) {
-			e.printStackTrace();
+		if (isLoggedIn(request)) {
+			//Inicializamos los Services
+			FilesService fs = new FilesService();
+			JobsService jobsService = new JobsService();
+			//Obtenemos la data por Post 
+			Integer quantity = Integer.parseInt(request.getParameter("quantity"));
+			Integer abrochado = Integer.parseInt(request.getParameter("abrochado"));
+			Integer anillado = Integer.parseInt(request.getParameter("anillado"));
+			Integer dobleFaz = Integer.parseInt(request.getParameter("dobleFaz"));
+			User user = (User) request.getAttribute("user");
+			Integer jobId = Integer.parseInt(request.getParameter("id"));
+			
+			//Identificamos el job correspondiente
+			Job job = null;
+	        try {
+	            job = jobsService.getJobById(jobId);
+	        } catch (SQLException e) {
+	            throw new ServletException();
+	        }
+	        
+	        //Obtenemos el nombre del archivo 
+	        Collection<Part> parts = request.getParts();
+	        Part part = parts.iterator().next();
+	        String filename;
+	        filename = getFileName(part);
+	        
+	        InputStream stream = part.getInputStream(); //AGARRARLO
+	        //Obtenemos el archivo
+	        File file = new File();
+			try {
+				file = fs.createFileFromInputStream(stream, filename);
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+	        
+	        //Creamos la jobLine y le seteamos la metadata
+	        JobLine jobLine = new JobLine();
+	        jobLine.setFile(file);
+	        jobLine.setQuantity(quantity);
+	        jobLine.setAbrochado(abrochado.equals(1));
+	        jobLine.setDobleFaz(dobleFaz.equals(1));
+	        jobLine.setAnillado(anillado.equals(1));
+	        //La agregamos al Job
+	        try {
+				jobsService.addJobLineToJob(job, jobLine);
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
-        
-        //Creamos la jobLine y le seteamos la metadata
-        JobLine jobLine = new JobLine();
-        jobLine.setFile(file);
-        jobLine.setQuantity(quantity);
-        jobLine.setAbrochado(abrochado.equals(1));
-        jobLine.setDobleFaz(dobleFaz.equals(1));
-        jobLine.setAnillado(anillado.equals(1));
-        //La agregamos al Job
-        try {
-			jobsService.addJobLineToJob(job, jobLine);
-		} catch (SQLException e) {
-			e.printStackTrace();
+		
+		else {
+			// Not logged in. You shall not pass.
+			redirectToLogin(request, response);
 		}
 	}
 	/**
