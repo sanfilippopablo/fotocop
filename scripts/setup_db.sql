@@ -128,7 +128,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (1,'pablo','$2a$08$rveeVqvtEkskz4hUZTZF2uV.L3xxKwRx9GU0s06gWAbR6P6DLVXrq','pablo@gmail.com',1),(2,'facundo','$2a$08$Nnf71JEfrx4jp8WUXg6Hdu82lRn3q4TF9NEH/wuJCwlMMJ4hUIeHa','facundo@gmail.com',0),(5,'chalo','$2a$12$JldENOHpIi1ygLkI54KIruOvHPpWU4VGEQ.AzEKO1OsffeKvn.HOa','gperfar@gmail.com',0),(7,'sebabaskov','$2a$12$ZgVbagtrMws.gQhRRe2nNuyA/WlcSsbewAWbcNzxJHdPnI44WX1Fq','sebabaskov@gmail.com',0);
+INSERT INTO `users` VALUES (1,'pablo','$2a$08$rveeVqvtEkskz4hUZTZF2uV.L3xxKwRx9GU0s06gWAbR6P6DLVXrq','pablo@gmail.com',1),(2,'facundo','$2a$08$Nnf71JEfrx4jp8WUXg6Hdu82lRn3q4TF9NEH/wuJCwlMMJ4hUIeHa','facundo@gmail.com',0),(5,'chalo','$2a$12$JldENOHpIi1ygLkI54KIruOvHPpWU4VGEQ.AzEKO1OsffeKvn.HOa','gperfar@gmail.com',0);
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
